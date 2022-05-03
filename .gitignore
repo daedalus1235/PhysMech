@@ -1,0 +1,24 @@
+.gitignore
+
+#LaTeX tmp files
+*.aux
+*.log
+*.toc
+*.fls
+*.fdb_latexmk
+
+#PDF
+*.pdf
+
+#SyncTeX
+*.synctex.gz
+
+#Beamer
+*.snm
+*.vrb
+*.nav
+*.out
+
+#BibTeX
+*.bbl
+*.blg

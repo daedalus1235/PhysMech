@@ -1,0 +1,275 @@
+%! TEX root = 0-main.tex
+\chapter{Calculus of Variations}
+\section{Hamilton's Principle}
+Hamilton's Principle is a way to reformulate mechanics. Rather than using kinematics and dynamics, it searches all paths for the path that has the minimum ``action.'' A way to visualize this is imagine you are on a beach, and you want to get to a point in the ocean. What is the fastest way to get between the two points? By varying the path between the two points, you can minimize the time to find the optimal path.
+
+\subsection{Paths}
+Imagine two points on a (not necessarily flat) plane. What is the shortest distance between two points? We know how to minimize a differentiable function; just take derivativs and check the neighbourhood around the zeroes. 
+
+We can do something similar by making a function of the path:
+\begin{equation}
+	D = \int_0^1 \d\ell
+\end{equation}
+Writing the path in terms of a functional \(y(x)\), we can rewrite the differential length as:
+\begin{align*}
+	\d\ell &= \sqrt{\d{x}^2 + \d{y}^2}\nonumber\\
+	       &=\d{x}\sqrt{1+\left(\der{y}{x}\right)^2}\\
+	D&=\int_{x[0]}^{x[1]}\d{x}\sqrt{1+\left(\der{y}{x}\right)^2}
+\end{align*}
+Plugging in the path \(y(x)=m x\), we obtain the expected result by pythagorean theorem. However, what if we don't have a pre-determined path? 
+
+We introduce the concept of a \emph{functional}. A function is an object that maps an element of one set to another set. For a functional, the domain is a space of functions. 
+
+One such functional is:
+\begin{equation}
+	J[y] = \int_{x_0}^{x_1} F(y,y',x)\d{x}
+\end{equation}
+
+In this sense, we defined before the distance functional for a 2D path.
+
+We can minimize a functional in much the same way as we minimize a function. There exists a function \(y_{\min} \) such that all functions within its neighbourhood have a larger value of the functional.
+
+What does the neighbourhood of \(y\) look like? We can add an arbitrary (differentiable) function \(\eta(x)\) such that \(\eta(x_1)=\eta(x_0)=0\), and redefine \(y\) such that \(y(x,\alpha) = y(x,0)+\alpha\eta(x)\). This allows us to reparametrize the functional as:
+\[J(\alpha)=\int_{x_0}^{x_1} F\left[y(x,\alpha), \der{y(x,\alpha)}{x}, x\right]\d{x}\]
+
+so that the minimum occurs at
+\[\at{\der{J}{\alpha}}{\alpha=0}=0\]
+
+\begin{aside}[Functional Example]
+Define a function \(\eta(x)=\sin(x)\) and the function \(F=\left(\der{y}{x}\right)^2\)
+We can show that \(y=x\) is an extremum by defining 
+\[y(x,\alpha)=x+\alpha\sin x\]
+This function has the derivative
+\[\der{y}{x}=1+\alpha\cos x\]
+Thus, the functional becomes 
+\begin{align}
+	J(\alpha) &=\int_{0}^{2\pi} 1 + 2\alpha \cos x + \alpha^2 \cos ^2 x \d{x}\\
+	&=2\pi \alpha^2\pi
+\end{align}
+Clearly, this is minimized by \(\alpha=0\).
+\end{aside}
+
+The reason that we contrain \(\eta\) to be differentiable is that we can instead evaluate:
+\begin{align}
+	0&=\pder{J}{\alpha}\nonumber\\
+	 &=\pder{}{\alpha}\int_{x_0}^{x_1}\d{x} F(y, y', x)\nonumber\\
+	 &=\int_{x_0}^{x_1}\d{x}\pder{F}{y}\pder{y}{\alpha}+\frac{\partial F}{\partial y'}\pder{y'}{\alpha}\nonumber\\
+	 &=\int_{x_0}^{x_1}\d{x}\pder{F}{y}\eta + \frac{\partial F}{\partial y'}\eta'\nonumber\\
+	 \intertext{Integrating by parts and throwing away boundary conditions}
+	 &=\cancel{\eval{\frac{\partial F}{\partial y'}\eta(x)}{x_1}{x_2}}-\int_{x_0}^{x_1}\d{x} \pder{F}{x}\eta + \eta\frac{\partial}{\partial x}\frac{\partial F}{\partial y'}\nonumber\\
+	 &= \int_{x_0}^{x_1}\d{x}\left[ \pder{F}{y}-\der{}{x} \left(\frac{\partial F}{\partial y'}\right)\right]\eta\nonumber\\
+	\then 0&=\pder{F}{y}-\der{}{x} \left(\frac{\partial F}{\partial y'}\right)\label{eq2:euler}
+\end{align}
+
+Equation~\ref{eq2:euler} follows from the fact that the equation must be independent of perturbing path \(\eta\). This equation is known as the \emph{Euler Equation}, and latter will be applied as the \emph{Euler Lagrange Equation}
+
+\section{Brachistochrone}
+Given two points \(A,B\) and a constant gravitational field \(g\), what is the path of least time?
+
+Define the coordinate axis as \(+y\) pointing right and \(x\) pointing down. We can write a time functional 
+\[	T = \int_{x_0}^{x_1} \d{t}=\int_{x_1}^{x_2}\frac{\d\ell}{v}\]
+Assuming no friction and a stationary initial condition, the velocity of the particle can be written in terms of the height fallen. Further, writing out the differential path length element,
+\[T = \int_{x_1}^{x_2}\frac{1}{\sqrt{2gx}}\sqrt{1+(y')^2}\d{x}\]
+Thus, we have
+\[F =\frac{1}{2gx}\sqrt{1+(y')^2}\]
+Applying the Euler equation,
+\[\pder{F}{y}=0\]
+\[\frac{\partial F}{\partial y'} = \frac{1}{\sqrt{2gx}}\frac{y'}{\sqrt{1+(y')^2}}\]
+\[\der{}{x}\frac{1}{\sqrt{2gx}}\frac{y'}{\sqrt{1+(y')^2}}=0\]
+\[\frac{1}{\sqrt{x}}\frac{y'}{\sqrt{1+(y')^2}}=k\equiv \frac{1}{\sqrt{2a}}\]
+\[\frac{(y')^2}{x(1+(y')^2)}=\frac{1}{2a}\]
+Using the substitution \(x=a(1-\cos\theta)\), 
+\begin{align*}
+	y&=\int\sqrt{\frac{a(1-\cos\theta)}{2a-a(1-\cos\theta)}}a\sin\theta\d\theta\\
+	\intertext{and several trig identities,}
+	 &=a\int1-\cos\theta\d\theta\\
+  \then y&=a(\theta - \sin\theta)\\
+	x&=a(1-\cos\theta)
+\end{align*}
+This parametrization gives a cycloid. This is the shape that occurs when following a point on circle of radius \(a\) as it rolls along the line \(x=A_x\). The choice of coordinates, while unorthodox, yields a nice form; while using a standard \(x,y\) plane would seem no different, the resulting differential equation is \emph{much} more difficult to solve.
+
+\section{Geodesic on a Sphere}
+The differential line element in spherical coordinates is 
+\[\d{s}^2=\d{r}^2+r^2\d\theta^2+r^2\sin^2\theta\d\phi^2\]
+thus,
+\[\d{s}=\d\theta \sqrt{\left(\der{r}{\theta}\right)+r^2+r^2\sin^2\theta\left(\der{\phi}{\theta}\right)}\]
+Note however, that the radius is a constant \(r=R\). Thus, we can rewrite the line element as
+\[\d{s}=\d\theta R\sqrt{1+\sin^2\theta(\phi')^2}\]
+Anticipating the use of Euler's Equation, we write the functional
+\[J=R\int_{\theta_0}^{\theta_1}\d\theta\sqrt{1+\sin^2\theta(\phi')^2}\]
+Thus, we use 
+\[F=\sqrt{1+\sin^2\theta(\phi')^2}\]
+\[\pder{F}{\phi}=0\]
+\[\pder{F}{\phi'}=\frac{\sin^2\theta\phi'}{\sqrt{1+\sin^2\theta(\phi')^2}}\]
+\[\pder{F}{y}-\der{}{x}\pder{F}{y'}=0-\der{}{x}\pder{F}{y'}=0\]
+\[\der{}{x}\pder{F}{y'}=0\]
+\[\sin^2\theta\phi'=C\sqrt{1+\sin^2\theta(\phi')^2}\]
+\[(\phi')^2 = \frac{C^2}{\sin^2\theta(\sin^2\theta-C^2)}\]
+\[\der{\phi}{\theta}=  \frac{C\csc^2\theta}{\sqrt{1-C^2\csc^2\theta}}\]
+\[\Delta\phi = \sin^{-1}\left(\frac{\cot\theta}{\beta}\right)\]
+for \(\beta\equiv \frac{\sqrt{1-c^2}}{c}\)
+Rearranging,
+\[\sin(\phi-\alpha)=\frac{\cot\theta}{\beta}\]
+\[\sin\phi\cos\alpha-\cos\phi\sin\alpha =\frac{\cos\theta}{\beta\sin\theta}\]
+\[\sin\phi\cos\alpha\sin\theta - \cos\phi\sin\alpha\sin\theta = \cos\theta\]
+Defining \(A\equiv \beta\cos\alpha\) and \(B\equiv\beta\sin\alpha\), and multiplying both sides by the radius,
+\[R\cos\theta = AR\sin\theta\sin\phi-BR\sin\theta\cos\phi\]
+\[z = Ay-Bx\]
+Or, the shortest path is the intersection of the sphere with the plane defined by the centre of the sphere and the two endpoints. This is a segment of an object called the \emph{great circle}.
+Note, that there are actually two solutions to the euler equation---one going clockwise and the other going counterclockwise. This is because the euler equation gives extrema, not just minima. In fact, the two solutions are the shortest straight line path and longest straight line path.
+
+\section{Soap Film Problem}
+What curve \(y(x)\), when revolved around the \(x\)-axis, yields the surface with minimal area? This problem actually happens to have an issue that makes it difficult to solve with the Euler Equation. To see why, let us try to compute this curve.
+
+We can take the differential area element to be the surface area of an infinitessimally short, hollow cylinder:
+\[\d{A}=2\pi r h = 2\pi y \d{s}=2\pi y \d{x}\sqrt{1}{+(y')^2}\]
+Computing,
+\[\pder{F}{y}=\sqrt{1+(y')^2}\]
+\[\pder{F}{y'}=\frac{yy'}{\sqrt{1+(y')^2}}\]
+\[\der{}{x} \pder{F}{y'}= \frac{(y')^2}{\sqrt{1+(y')^2}}+\frac{yy''}{\sqrt{1+(y')^2}}-\frac{y(y')^2}{[1+(y')^2]^{3/2}}\]
+Putting these together,
+\[0=\sqrt{1+(y')^2}- \frac{(y')^2}{\sqrt{1+(y')^2}}-\frac{yy''}{\sqrt{1+(y')^2}}+\frac{y(y')^2}{[1+(y')^2]^{3/2}}\]
+which is not an easy equation to solve.
+
+While we can swap the axes to make the integral easier, we can also use an alternate formulation of the Euler equation.
+
+\section{Alternate Form of Euler Eqn}
+We can write the total derivative of \(F\) as:
+\[\der{F}{x}=\pder{F}{y}\der{y}{x}+\pder{F}{y'}\der{y'}{x}+\pder{F}{x}\]
+\[\der{F}{x}=y'\pder{F}{y}+y''\pder{F}{y'}+\pder{F}{x}\]
+Using the fact that
+\begin{align*}
+	\pder{}{x}\left(y'\pder{F}{y'}\right)&=y''\pder{F}{y'}+y'\pder{}{x}\pder{F}{y'}\\
+	\intertext{we can substitute the total differential in}
+	&=\der{F}{x}-\pder{F}{x}-y'\left[\pder{F}{y}-\der{}{x}\pder{F}{y;}\right] 
+\end{align*}
+However, because we know the bracketed term is the original statement of the euler equation, which is equal to zero, and because of the linearity of the derivative operator, we obtain
+\begin{equation}
+	\pder{F}{x} - \der{}{x}\left(F-y'\pder{F}{y'}\right)=0
+\end{equation}
+
+Using this statement of the euler equation, we can revisit the soap film problem.
+Once again, using
+\[F=\sqrt{1+(y')^2}\]
+we obtain:
+\[F-y'\pder{F}{y'}=c\]
+as \(F\) doesn't have explicit dependence on \(x\). Solving this differential equation,
+\[C=y\sqrt{1+(y')^2}-y'\frac{yy'}{\sqrt{1+(y')^2}}\]
+\[\then y=C\sqrt{1+(y')^2}\]
+\[\then y' = \sqrt{\left(\frac{y}{c}\right)^2-1}\]
+\[\then x+A = C\cosh^{-1}(y/c)\]
+\[\then y=C\cosh\left(\frac{x+a}{C}\right)\]
+
+
+\section{Euler in Higher Dimensions}
+Currently, we have only been applying the Euler Equation to functions of a single variable. However, in mechanics, we will often encounter functions of multiple variables.
+What we can do is we can parametrize the path as a vector valued function:
+\[x(u), y(u)\]
+and rewrite the action integral as:
+\begin{equation}
+	J=\int_{u_0}^{u_1}\d{u} F(x,x',y,y',u)
+\end{equation}
+However, this is predicated on the fact that \(x\) and \(y\) are independent---there are no constraints restricting one to a function of the other.
+
+Similar to the 1D case, we assume we have a function \(\vv{r}(u)\) that is a solution to the minimization problem. We can then write a nearby point in terms of a perturbing function:
+\begin{equation}
+	\vv{r}(u,\alpha)=\vv{r}(u,0)+\alpha\vv\eta(u)
+\end{equation}
+
+Thus,
+\begin{align}
+	\pder{J}{\alpha}&=\int_{u_0}^{u_1}\pder{F}{x}\pder{x}{\alpha}+\pder{F}{x'}\pder{x'}{\alpha}+\pder{F}{y}\pder{y}{\alpha}+\pder{F}{y'}\pder{y'}{\alpha}\d{u}\nonumber\\
+			&=\int_{u_0}^{u_1}\eta_1\left[\pder{F}{x}-\der{}{u}\pder{F}{x'}\right]+\eta_2\left[\pder{F}{y}-\der{}{y}\pder{F}{y'}\right]\d{u}
+\end{align}
+Because we have assumed that \(x\) and \(y\) are independent variables, then we must have that each of the bracketed terms satisfies zero independently.
+
+\subsection{Shortest Path on a Plane}
+We revisit the problem of the shortest path on a plane using the euler equation we just derived for higher dimensions. The line elements is given:
+\begin{align*}
+	\d{s} &= \sqrt{\d{x}^2+\d{y}^2}\\
+	      &=\d{u}\sqrt{(x')^2+(y')^2}
+\end{align*}
+Then, using
+\[F=\sqrt{(x')^2+(y')^2}\]
+we can solve the euler equation for each of the components:
+\begin{align*}
+	0&=\pder{F}{x}-\der{}{u}\pder{F}{x'}\\
+	 &=0-\der{}{u}\frac{x'}{\sqrt{(x')^2+(y')^2}}\\
+	C_1&=\frac{x'}{\sqrt{(x')^2+(y')^2}}\\
+	\intertext{similarly,}
+	C_2&=\frac{y'}{\sqrt{(x')^2+(y')^2}}\\
+	m&\equiv\frac{y'}{x'}=\der{y}{x}\\
+	\d{y}&=m\d{x}\\
+	\Delta y & = m\Delta x
+\end{align*}
+which is once again the equation of a line.
+
+\section{Multiple Dimensions with Constraints}
+Say we want to constrian a problem to the surface of a circle. We impose a \emph{constraint equation}
+\[g(x,y)=x^2+y^2-R^2=0\]
+which constrains the values of \(x\) and \(y\) to lie on the circle.
+
+Differentiating the constraint equation,
+\[\der{g}{\alpha}=\pder{g}{x}\pder{x}{\alpha}+\pder{g}{y}\pder{y}{\alpha}\]
+and substituting the perturbing function \(\eta\),
+\[\der{g}{\alpha}=\pder{g}{x}\eta_1+\pder{g}{y}\eta_2=0\]
+Thus,
+\begin{equation}
+	\pder{g}{x}\eta_1=-\pder{g}{y}\eta_2
+\end{equation}
+or
+\[\del g*\eta=0\]
+
+The action integral can be then written:
+\[\pder{J}{\alpha}=\int_{u_0}^{u_1}\left[\left(\pder{F}{x}-\der{}{u}\pder{F}{x'}\right)-\left(\pder{F}{y}-\der{}{u}\pder{F}{y'}\right)\frac{\pder{g}{x}}{\pder{g}{y}}\right]\eta_1\d{u}\]
+Once again, the quantity in the square brackets must be equally zero. Thus,
+\begin{equation}
+	\left(\pder{F}{x}-\der{}{x}\pder{F}{x'}\right)\left(\pder{g}{x}\right)^{-1}=\left(\pder{F}{y}-\der{}{u}\pder{F}{y'}\right)\left(\pder{g}{y}\right)^{-1}\equiv -\lambda(u)
+\end{equation}
+where the \(-1\) refers to the multiplicative inverse, not the function inverse.
+
+We can then split the equation into one of each variable, to determine an equation with \emph{lagrange multipliers}
+\begin{equation}
+	\pder{F}{x}-\der{}{u}\pder{F}{x'}+\lambda(u)\pder{g}{x}=0
+\end{equation}
+A similar equation results from the \(y\) variable, but the function \(\lambda(u)\) is the same for both equations.
+
+\subsection{Constraint example}
+Let us apply this to the action integral 
+\[J=\int_1^2\d\ell=\int_{u_0}^{u_1}\sqrt{x'^2+y'^2}\d u\]
+subjected to the constraint
+\[g=x^2+y^2-R^2\]
+This results in
+\[\pder{F}{x}=0\]
+\[\pder{F}{x'}=\frac{x'}{\sqrt{x'^2+y'^2}}\]
+Thus,
+\[-\der{}{u}\frac{x'}{\sqrt{x'^2+y'^2}}+2\lambda(u)=0\]
+Following a similar procedure, and setting the \(\lambda\)'s equal to each other,
+\[\frac{1}{x}\der{}{u}\frac{x'}{\sqrt{x'^2+y'^2}}=\frac{1}{y}\der{}{u}\frac{y'}{\sqrt{x'^2+y'^2}}\]
+differentiating wrt u and simplifying, we obtain the equation
+\[(yy'-xx')(x''y'+x'y'')=0\]
+Recognizing that
+\[\der{g}{u}=xx'+yy'=0\then -xx'=yy'\]
+we get
+\[2yy'(x''y'+x'y'')=0\]
+
+\section{Action}
+In most literature, the shorthand
+\begin{equation}
+	\delta J\d{\alpha}\equiv \pder{J}{\alpha}\d{\alpha}
+\end{equation}
+is introduced. This is equivalent to:
+\begin{equation}
+	\delta J = \int_{x_0}^{x_1}\left(\pder{F}{y}-\der{}{x}\pder{F}{y'}\right)\delta y\d{x}
+\end{equation}
+Where once again
+\[\delta y \equiv \pder{y}{\alpha}\d{\alpha} \sim\eta(x)\]
+\begin{aside}[``Derivation'']
+	\begin{align*}
+		\delta J &= \delta \int_{x_0}^{x_1} F\d{x}\\
+			 &=\int_{x_0}^{x_1}\delta F \d{x}\\
+			 &=\int_{x_0}^{x_1}\pder{F}{y}\delta y + \pder{F}{y'}\delta y'\d{x}\\
+			 &=\int_{x_0}^{x_1}\left(\pder{F}{y}-\der{}{x}\pder{F}{y'}\right)\delta y \d{x}
+	\end{align*}
+\end{aside}
+

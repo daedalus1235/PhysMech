@@ -1,0 +1,422 @@
+%! TEX root = 0-main.tex
+\chapter{Newtonian Mechanics}
+\section{Introduction}
+\subsection{Notation}
+Rodriguez uses different notation compared to the textbook:
+\begin{center}
+\begin{tabular}{l|l|l}
+	& T\&M & Rodriguez\\
+	\hline
+	scalars & \(x,\,r\) & \(x,\,r\)\\
+	vectors & \(\vb{x},\,\vb{r}\) & \(\vv{x},\, \vv{r}\)\\
+	unit vectors & \(e_{r},\, e_\theta\)& \(\hat{r},\,\hat\theta\)\\
+	time derivatives & \(\dot{x},\, \ddot{\vb{x}}\) & \(\der{x}{t},\,\ddot{\vv{x}},\,\der{\vv{x}}{t2}\)
+\end{tabular}
+\end{center}
+
+\subsection{Partial vs Total Derivative}
+Partial Derivative:
+\[\pder{f}{t}\]
+Total Derivative:
+\[\der{f}{t}=\pder{f}{x}\der{x}{t}+\pder{f}{t}\]
+
+\subsection{Physical Mechanics}
+In other schools, this course would be called classical mechanics. As opposed to Newtonian mechanics, which relies on forces and acceleration, Classical Mechanics relies on Energy with the calculus of variations to compute time evolution. 
+
+\section{Newtonian Mechanics}
+\subsection{First Law}
+{\bfseries A body remains at rest, or in uniform motion, unles acted upon by a force}.
+
+The first law is a bit vague, as force is not properly defined yet. Further, this idea of motion is deeply connected to the idea of inertial reference frames, and is easiest in cartesian coordinates.
+Any motion (without acceleration) can be transformed to a different frame by \(\vv{x}'=\vv{x}+\vv{v}t\).
+Physics between these two inertial reference frames must obey the same laws; the same is not true of non-inertial reference frames, which require the introduction of pseudo-forces (e.g.\  centrifugal force).
+
+\subsection{Second Law}
+{\bfseries A body acted upon by a force moves in such a manner that the time rate of change of momentum equals the force.}
+
+Momentum is defined to be \(\vv{p}=m\vv{v}\). Thus, the second law can be written as:
+\begin{equation}
+	\vv{F}=\der{\vv{p}}{t}=\der{m}{t}\vv{v}+m\der{\vv{v}}{t}\label{eq0:Newton2}
+\end{equation}
+In the limiting case of \(\der{m}{t}=0\) (or constant mass), this equation reduces to the famous
+\[\vv{F}=m\vv{a}\]
+
+\subsubsection{Constant Acceleration}
+Given a constant acceleration, 
+\[F=ma=m\ddot{x}\]
+\[a=\der{v}{t}\]
+\[v=v_0+at\]
+\[v_0+at=\der{x}{t}\]
+\[x=x_0+v_0t+\frac{1}{2}at^2\]
+Additionally,
+\[\ddot{x}=a\]
+\[2\dot{x}\ddot{x}=2\dot{x}a\]
+\[\der{}{t}{\left(\dot{x}\right)}^2=2\der{x}{t}a\]
+\[v^2-v_0^2=2a(x-x_0)\]
+\subsubsection{Parabolic Motion: Brute Force}
+A man is standing at the top of a \(h\) high cliff and throws a javelin at angle \(\theta\) above the horizontal with an initial velocity of \(v_0\) off the cliff. The initial conditions are given:
+\[x_0=\vect{0,h},\qquad v_0=\vect{v_0\cos\theta, v_0\sin\theta}\]
+Because the javelin is considered to be in freefall, the constant acceleration is given:
+\[a=\vect{0,-g}\]
+The horizontal velocity remains constant. Thus, to find the vertical component:
+\[v_y^2=v_0^2\sin^2\theta=2(-g)(0-h)\]
+\[v_y=\sqrt{2hg+v_0^2\sin^2\theta}\]
+Thus, the total velocity when hitting the ground, is:
+\[\norm{v_f}=\sqrt{v_0^2+2gh}\]
+\subsubsection{Parabolic Motion: Easier Way}
+The easier way to solve this problem is to examine it from an energetics problem. The energy of the system at the beginning of the problem is
+\[E=T+U=\frac{1}{2}mv_0^2+mgh\]
+by conservation of energy, the final energy must equal the initial velocity, and the potential energy must go to zero. Thus,
+\[\frac{1}{2}mv_0^2+mgh=\frac{1}{2}mv^2\]
+\[v^2=v_0^2+2gh\]
+\[v=\sqrt{v_0^2+2gh}\]
+which is the same as what was obtained using the previous method.
+\subsection{Third Law}
+{\bfseries If two bodies exert forces on each other, these forces are equal in magnitude and opposite in direction.}
+
+This statement results in the conservation of momentum, after integrating wrt.\ time. However, this is only true of \emph{central forces}, or forces that are applied along the line connecting the two bodies.
+
+A notable exception to this is the magnetic force. Imagine two wires, which lie in parallel planes, but are perpendicular to each other.
+In this system, the infinitessimal elements \(I\d{\vv{\ell}}\) apply a force on each other, but these forces are \emph{at a perpendicular angle}, not anti-parallel.
+The resolution to this issue is the comparison of momenta; the momenta can be dumped into the electric and magnetic field.
+
+\section{Non-Cartesian Reference Frames}
+\subsection{Polar Coordinates}
+The position vector is given specified by the pair \((r,\theta)\). The coordinates can be transformed between cartesian and polar coordinates as follows:
+\begin{subequations}
+	\begin{equation}
+		x=r\cos\theta
+	\end{equation}
+	\begin{equation}
+		y=r\sin\theta
+	\end{equation}
+	\begin{equation}
+		r=\sqrt{x^2+y^2}
+	\end{equation}
+	\begin{equation}
+		\theta=\tan^{-1}(y/x)
+	\end{equation}
+\end{subequations}
+However, the basis vectors depend on the position. The unit vectors \(\hat r\) and \(\hat \theta\) are given (in cartesian coordinates):
+\begin{subequations}
+	\begin{equation}
+		\hat r= \vect{\cos\theta, \sin\theta}
+	\end{equation}
+	\begin{equation}
+		\hat \theta =\vect{-\sin\theta, \cos\theta}
+	\end{equation}
+\end{subequations}
+These unit vectors also change in time:
+\begin{subequations}
+	\begin{equation}
+	\der{\hat{r}}{t}=\vect{-\sin\theta, \cos\theta}\der{\theta}{t}=\boxed{\der{\theta}{t}\hat{\theta}}\\
+	\end{equation}
+	\begin{equation}
+	\der{\hat{\theta}}{t}=\vect{-\cos\theta, -\sin\theta}\der{\theta}{t}=\boxed{-\der{\theta}{t}\hat{r}}
+	\end{equation}
+\end{subequations}
+
+\subsubsection{Velocity and Acceleration}
+The position vector is given:
+\[\vv{r}=r\hat{r}\]
+Then, the velocity is obtained through differentiation:
+\begin{subequations}
+\begin{align}
+	\dot{\vv{r}}&=\dot{r}\hat{r}+r\dot{\hat{r}}\nonumber\\
+		    &=\dot{r}\hat{r}+r\dot{\theta}\hat{\theta}
+		    \intertext{The acceleration is similarly obtained:}
+	\ddot{\vv{r}}&=\ddot{r}\hat{r}+\dot{r}\dot{\theta}\hat{\theta}+\dot{r}\dot{\theta}\hat{\theta}+r\ddot{\theta}\hat\theta-r\dot{\theta}\dot{\theta}\hat{r}\\
+		     &=(\ddot{r}-r\dot{\theta}^2)\hat{r}+(2\dot{r}\dot{\theta}+r\ddot{\theta})\hat{\theta}
+\end{align}
+\end{subequations}
+Of interest are the \(-r\dot{\theta}^2\) and the \(2\dot{r}\dot{\theta}\), which correspond to the centrifugal and coriolis forces.
+\begin{aside}[Simple Pendulum Motion]
+	\emph{A block is on a semi-circular half-pipe track. What is the period of oscillation of the block?}
+
+	The polar coordinate system is chosen such that the origin is the centre of the half-pipe and the lowest point of the track is \(\theta=0\). The normal force that the box experiences is always in the \(-\hat{r}\) direction, and is written:
+	\[\vv{F}_N=-F_N\hat{r}\]
+\end{aside}
+
+\section{Conservation Laws}
+{\bfseries Total linear momentum of a particle is conserved when the force on it is zero}
+
+This follows immediately from Equation~\ref{eq0:Newton2}. If instead there are multiple particles, following from Newton's third law, the total linear momentum of the system, if there are no external forces, is conserved.
+
+{\bfseries Total angular momentum of a particle is conserved when the torque on it is zero}
+
+The angular momentum is defined:
+\begin{equation}
+	\vv{L}=\vv{r}\times\vv{p}\label{eq0:angularmomentum}
+\end{equation}
+and torque is defined
+\begin{equation}
+	\vv{N}=\vv\tau=\vv{r}\times\vv{F}\label{eq0:torque}
+\end{equation}
+The torque is to angular momentum as force is to linear momentum; that is:
+\begin{equation}
+	\vv{N}=\der{\vv{L}}{t}
+\end{equation}
+This can be seen from
+\[\der{\vv{L}}{t}=\der{}{t}(\vv{r}\times\vv{p})=\dot{\vv{r}}\times\vv{p}+\vv{r}\times\dot{\vv{p}}=\cancel{m(\vv{v}\times\vv{v})}+\vv{r}\times\vv{F}=\vv{N}\]
+
+{\bfseries Conservation of Energy}
+Work is defined
+\begin{equation}
+	W=\int_\gamma \vv{F}*\d{\vv{r}}
+\end{equation}
+
+For a straight line,
+\begin{align*}
+	W&=\int_A^B F*\d{r} = \int_A^B m \der{v}{t} * \der{r}{t} \d{t}\\
+	 &=\int_A^B\frac{1}{2}m*2v*\der{v}{t}\d{t}\\
+	 &=\int_A^B\frac{1}{2}m\der{}{t}(v*v)\d{t}\\
+	 &=\int_A^B\frac{1}{2}m\der{}{t}(v^2)\d{t}\\
+	 &=\frac{1}{2}mv_B^2-\frac{1}{2}mv_A^2
+\end{align*}
+From this, the work energy theorem (for a conservative force), is obtained:
+\begin{equation}
+	W\equiv \int_A^B \vv{F}*\d{r} = T_B-T_A \label{eq0:workenergythm}
+\end{equation}
+where \(T\equiv \frac{1}{2}mv^2\) is the kinetic energy.
+
+\subsection{Conservative Forces}
+A conservative force is \emph{path independent}; that is, any path between two points yields the same amount of work. Thus, an integral over any closed loop is zero:
+\begin{equation}
+	W_\text{loop}=\oint_\gamma \vv{F}*\d{\vv{r}}=0
+\end{equation}
+A very important result can be obtained using this fact.
+\begin{equation}
+	\oint_{\partial S}\vv{F}*\d{\vv{r}}=\int_S \del\times\vv{F}*\d{\vv{A}}\label{eq1:stokes}
+\end{equation}
+Equation~\ref{eq1:stokes} is \emph{Stoke's Theorem}. By applying Stoke's theorem to any closed loop with a conservative force, the force is \emph{curl free}:
+\[\del\times\vv{F}=0\]
+Thus, TFAE\@:
+\begin{enumerate}
+	\item \(\del\times\vv F=0\) everywhere
+	\item \(\int_a^b \vv{F}*\d{\vv{r}}\) is path independent
+	\item \(\oint\gamma \vv{F}*\d{\vv{r}}=0\) for every loop \(\gamma\)
+	\item There exists a scalar potential \(U\) such that \(\vv{F}=-\del U\)
+\end{enumerate}
+
+Point 4 implies the others through the Fundamental Theorem of Line Integrals:
+\begin{equation}
+	\int_\gamma -\del U*\d{vv{r}}=\int_{\gamma[A]}^{\gamma[B]}-\d{U}=U(\gamma[A])-U(\gamma[B])
+\end{equation}
+However, this means that any transformation \(U'=U+C\) has an equivalent gradient. Thus, potentials can only be defined relatively; there is no absolute potential. A reference point must be defined for a potential, and is chosen to make calculations easier\footnote{In higher physics, this becomes the choice of a \emph{gauge}}. 
+
+If we define a total energy 
+\[E=T+U\]
+We can get (for a constant mass):
+\begin{align}
+	\der{E}{t}&=\der{T}{t}+\der{U}{t}\nonumber\\
+		  &=\der{}{t}\left(\frac{m}{2}\vv{v}*\vv{v}\right)+\del U*\der{r}{t}+\pder{U}{t}\nonumber\\
+		  &=m\vv{a}*\vv{v}+\del U * \vv{v} + \pder{U}{t}\nonumber\\
+		  &=(m\vv{a}+\del U)*\vv{v}+\pder{U}{t}\nonumber\\
+		  &=(m\vv{a}- F)*\vv{v}+\pder{U}{t}\nonumber\\
+		  &=\pder{U}{t}
+\end{align}
+
+Thus, as long as the potential \(U\) is constant with time, then energy is conserved. 
+
+\section{Equations of motion from energy}
+Using the fact that \(v=\der{x}{t}\), we can rewrite energy as
+\[E=\frac{1}{2}m\left(\der{x}{t}\right)^2+U\]
+then solve the differential equation:
+\[\der{x}{t}=\sqrt{\frac{2}{m}(E-U)}\]
+\[\d{t}=\frac{\d{x}}{\sqrt{\frac{2}{m}(E-U)}}\]
+\begin{equation}
+	\Delta t = \int_{x_0}^{x}\frac{\d{x}}{\sqrt{\frac{2}{m}(E-U)}}\label{eq1:Etox}
+\end{equation}
+While this equation is difficult to gain an exact form, it can be solved numerically. Further, from the denominator, you can determine where a particle would be able to reach, and where it would be forbidden (zero/complex denominator)
+
+\subsection{Simple Harmonic Oscillator}
+One case where the integral can be solved is a quadratic potential:
+\[U=\frac{1}{2}kx^2\]
+Plugging this into Equation~\ref{eq1:Etox}, the integral can be solved with inverse trig functions:
+\begin{subequations}
+\begin{align}
+	\sqrt{\frac{2}{m}}\Delta t&= \deval{\sqrt{\frac{2}{k}}\sin^{-1}\left[x\sqrt{\frac{k}{2E}} \right]}{x_0}{x}\nonumber\\
+	\sqrt{\frac{k}{m}}(t-t_0) &= \sin^{-1}\left[\sqrt{\frac{k}{2E}}x\right]-\underbrace{\sin^{-1}\left[\sqrt{\frac{k}{2E}}x_0\right]}_{\equiv C}\nonumber\\
+\sin^{-1}\left[\sqrt{\frac{k}{2E}}x\right]&=\sqrt{\frac{k}{m}}(t-t_0)+C\nonumber\\
+x(t)&=\sqrt{\frac{2E}{k}}\sin\left[\sqrt{\frac{k}{m}}(t-t_0)+C\right]\\
+    &= A\sin\left[\omega(t-t_0)\right]\label{eq1:shm}
+\end{align}
+\end{subequations}
+\subsubsection{Stable Equilibrium}
+We can expand a potential using a taylor series. Using the second derivative test, the an extrema of the potential energy is a stable equilibrium if the second derivative is greater than zero. If it is zero, then higher order derivatives need to be examined. If the lowest nonzero derivative is of an odd order or is negative, it is unstable. If the lowest nonzero derivative is both of even order and positive, then it is a stable equilibrium. 
+
+\subsubsection{Phase Space}
+It is useful to view the system in what is called \emph{phase space}. For the simple harmonic oscillator, it is useful to plot velocity against position. We have the velocity and position parametrized with time as:
+\begin{align*}
+	x&=\sqrt{\frac{2E}{k}}\sin\left[\sqrt{\frac{k}{m}}(t-t_0)+c\right]\\
+	v&=\sqrt{\frac{2E}{m}}\cos\left[\sqrt{\frac{k}{m}}(t-t_0)+c\right]
+\end{align*}
+Plotting the points \((x,v)\) as a function of \(t\) yields an ellipse. At higher energies, the size of the ellipse increases; at higher energies, the particle can go higher up the well.
+
+We also see the typical behaviour of the harmonic oscillator: the particle moves fastest when \(x=0\), and the particle is furthest from the minimum when \(v=0\).
+
+A more interesting phase space is that of \(U=-A\cos(x)\), as it has bound and free states.
+
+\section{Gravitation}
+Given two particles of mass \(m\) and \(M\), the gravitational attraction between the two particles is 
+\begin{equation}
+	\vv{F}=-\frac{GMm}{r^2}\hat{r}=-\frac{GmM}{r^3}\vv{r}
+\end{equation}
+
+This force does not depend on time, and it is easy to verify that this force is curl-free; the gravitational force is conservative. In fact, we can write the gravitational force's scalar potential as:
+\begin{equation}
+	U_g=-\frac{GMm}{r}
+\end{equation}
+Here, we implicitly define a point off at \(\infty\) as the reference potential of \(U(\infty)=0\).
+
+Something else that is interesting to note, is that you can rewrite the gravitational force as a vector field of acceleration, named the \emph{gravitational field}\footnote{This is one statement of the \emph{equivalence principle} of GR, which states that a gravitational field is indistinguishable from an accelerating frame.}
+\begin{equation}
+	\vv{a}\equiv \vv{g} = -\frac{GM}{r^2}\hat{r}
+\end{equation}
+
+Another consequence of the fact that the gravitational field is an acceleration field, it is typical to use the \emph{specific potential} rather than the scalar potential:
+\begin{equation}
+	\Phi \equiv U/m=-\frac{GM}{r}\label{eq1:spefu}
+\end{equation}
+
+\subsubsection{Collection of Particles}
+If instead we have multiple particles, we claim that the force obeys the superposition principle. Thus,
+\[\vv{F}=\sum_i \vv{F}_i\]
+\[\then \vv{g}=\sum_i \vv{g_i}=\sum_i-\del\Phi_i=-\del\left(\sum_i\Phi_i\right)\]
+\newpage
+Therefore,\footnote{Griffiths defines a variable cursive r such that \(\sr=\vv{r}-\vv{r}_i\)}
+\begin{subequations}
+	\begin{align}
+		\vv{g} &=\sum_i -\frac{G M_i}{\norm{\vv{r}-\vv{r}_i}^3}(\vv{r}-\vv{r}_i)\\
+		\Phi &= \sum_i -\frac{GM_i}{\norm{\vv{r}-\vv{r}_i}}
+	\end{align}
+\end{subequations}
+\subsubsection{Continuous Limit}
+For a solid object, we can define an infinitessimal mass element \(\d{m}\). Then, to compute the gravitational field from the object, we can integrate:
+\begin{equation*}
+	\vv{g}=-\int\frac{G\d{m}}{\norm{\vv{r}-\vv{r}_i}^3}(\vv{r}-\vv{r}_i)
+\end{equation*}
+More commonly, this is rewritten with \(\d{m}=\rho(\vv{r}')\d{V}\equiv \rho(\vv{r}')\d{\vv{r}'}\), such that:\footnote{the differentials \(\d{V}=\d{x}\d{y}\d{z}=\d{\vv{r}}=\d[3]{r}=\d{\tau}\) are different notations for a volume element}
+\begin{equation}
+	\vv{g}(\vv{r})=-\int_V \frac{G\rho(\vv{r}')}{\norm{\vv{r}-\vv{r}'}^3}(\vv{r}-\vv{r}')\d{\vv{r}'}
+\end{equation}
+
+Once again, this can be written in terms of a potential:
+\begin{equation}
+	\Phi = -\int_V \frac{G\rho(\vv{r}')}{\norm{\vv{r}-\vv{r}'}}\d{\vv{r}'}
+\end{equation}
+
+In terms of a surface mass, this equation becomes:
+\[\Phi = -G\int_A \frac{\sigma (\vv{r}')}{\norm{\vv{r}-\vv{r}'}}\d{A'}\]
+and so forth for a line mass.
+
+\section{Spherical Shell}
+We have a spherical shell centred at the origin, with radius \(R\) and constant density \(\sigma\). We want to find the gravitaional potential at a point \(r\) outside of the shell.	
+
+The total mass of the sphere is
+\[M=\int_a \sigma (\vv{r}')\d{A'}=\int_0^{2\pi}\d\phi \int_0^\pi\d\theta \sigma r^2\sin\theta= \sigma 4\pi R^2\]
+
+To calculate the potential,
+\begin{align*}
+	\Phi &= -G\int_A \frac{\sigma}{\norm{\vv{r}-\vv{r}'}}\d{A'}\\
+	     &= -G\int_0^{2\pi}\d\phi\int_0^\pi\d\theta \frac{\sigma R^2\sin\theta}{\sr }
+\end{align*}
+Using the law of cosines, we can rewrite the \(\sr \)
+     \[\sr ^2=r^2 +r'^2-2rr' \cos\theta\]
+Differentiating wrt \(\theta\) allows us to rewrite it as
+     \[2\sr \der{\sr}{\theta} = 2rR\sin\theta\]
+     \[\then \frac{\sin\theta\d{\theta}}{\sr} = \frac{\d{\sr}}{Rr}\] 
+Thus, the integral becomes
+\begin{align*}
+	\Phi &= -G\sigma\int_0^{2\pi}\d\phi\int_{\sr_{\min}}^{\sr_{\max}}\d{\sr}\frac{R}{r}\\
+	&=-\frac{2\pi G\sigma R}{r}[\sr_{\max} -\sr_{\min}]\\
+	&=-\frac{2\pi G \sigma R}{r}[(r+R)-(r-R)]\\
+	&=-\frac{2\pi G \sigma R}{r}*2R\\
+	&=-\frac{G*4\pi R^2\sigma}{r}\\
+	&=-\frac{GM}{r}
+\end{align*}
+This result is known as \emph{Newton's Second Shell Theorem}
+What happens instead if \(r<R\)? Then,
+\begin{align*}
+	\Phi &= -G\sigma\int_0^{2\pi}\d\phi\int_{\sr_{\min}}^{\sr_{\max}}\d{\sr}\frac{R}{r}\\
+	&=-\frac{2\pi G\sigma R}{r}[\sr_{\max} -\sr_{\min}]\\
+	&=-\frac{2\pi G \sigma R}{r}[(R+r)-(R-r)]\\
+	&=-\frac{4\pi G \sigma R r}{r}\\
+	&=-4\pi G \sigma R\\
+	&=-\frac{GM}{R}
+\end{align*}
+This is \emph{Newton's First Shell Theorem}.
+
+Conceqently, the force from opposite sides with a given solid angle \(\Omega\) cancels out:
+\begin{center}
+	\textcolor{red}{REVIEW VIDEO}
+\end{center}
+\[\delta g_i=\frac{G\delta m_i}{r_i^2}=\frac{G\rho(r_i^2\Omega)}{r_i^2}=G\rho\Omega\]
+The force on the test mass is only a function of the 
+
+If we consider the inverse, that is, the flux from the test mass going through a solid angle, we get\footnote{This abuses the fact that the area \(S\) is so small that all the radii are (approximately) parallel.}
+\begin{align*}
+	\phi_i&=\int_S\vv{g}*\d{\vv a}\\
+	      &=\int_S -\frac{GM}{r_i^2} r_i^2\d{\Omega}\\
+	      &=-GM\int_S\d{\Omega}\\
+\end{align*}
+For the whole sphere, this becomes:
+\begin{subequations}
+\begin{align}
+	\phi&=-GM\oint_S\d\Omega\nonumber\\
+	    &=-4\pi GM\nonumber\\
+	    &=-4\pi G\int_V\rho\d{V}\label{eq1:gaussint}\\
+	\oiint_{\partial V}g*\d{A}&=-4\pi G\iiint_V\rho\d{V}
+\end{align}
+\end{subequations}
+
+Using Equation~\ref{eq1:gaussint}, which is the integral form of \emph{Gauss's Law} for gravitation, along with the symmetries of the problem, deriving Newton's Shell Theorems becomes trivial. Outside the shell, we choose a concentric spherical shell. Because of the spherical symmetry, the flux lines are parallel to the radius, or normal to the surface. Thus,
+\[-4\pi GM = g 4\pi r^2\then g=\frac{-GM}{r^2}\]
+Inside the shell, we choose a surface that is contained wholey by the sphere:
+\[0=4 \pi r^2 g\then g=0\]
+
+Using the divergence Theorem, we can rewrite Gauss' law into a differential form:
+\begin{subequations}
+\begin{align*}
+	\del*g &= -4\pi G \rho\\
+	\del^2\Phi &=4\pi G\rho
+\end{align*}
+\end{subequations}
+
+\section{Ring mass}
+We have a ring of radius \(R\), mass density \(\lambda\), centered on the origin. The differential potential element along the \(z\) axis:
+\[\d\Phi = \frac{-G\d{m}}{\norm{\sr}} = -\frac{G\lambda R\d\phi}{\sqrt{z^2+R^2}}\]
+Thus, the potential along the \(z\) axis is
+\begin{equation}
+	\Phi(z)=\frac{-GM}{\sqrt{Z^2+R^2}}
+\end{equation}
+This linear potential has an equilibrium point at \(z=0\), and it is stable.
+
+However, pertubations in the \(xy\)-plane do not return to equilibrium.
+The differential potential element is once again
+\[\d\Phi = \frac{-G\lambda R\d\phi}{\norm{\sr}}=\frac{-G\lambda R\d\phi}{\sqrt{R^2+r^2-2rR\cos\phi}}=\frac{-G\lambda\d\phi}{\sqrt{1+\left(\frac{r}{R}\right)^2-2\left(\frac{r}{R}\right)\cos\phi}}\]
+Thus, 
+\[\int\d\Phi=\int_0^{2\pi}\frac{-G\lambda \d\phi}{\sqrt{1+\left(\frac{r}{R}\right) -2 \frac{r}{R}\cos\phi}}\]
+Defining
+\[\epsilon = \frac{r}{R}\left(\frac{r}{R} - 2\cos\phi\right)\]
+with \(r\ll R\). Thus, \(\epsilon\ll 1\). We can then taylor expand the integrand:
+\[\int\d\Phi\approx-G\lambda\int_0^{2\pi} 1-\frac{1}{2}\epsilon+\frac{3}{8}\epsilon^2-\frac{5}{16}\epsilon^3+O(\epsilon^4)\d\phi\]
+Expanding, and keeping terms up to \(O[(r/R)^3]\), the integrand becomes:
+\[1+\frac{r}{R}\cos\phi + \left(\frac{r}{R}\right)^2\frac{3\cos^2\phi - 1}{2} + \left(\frac{r}{R}\right)^3\frac{5\cos^2\cos\phi - 3\cos\phi}{2}\]
+The coefficients of \((r/R)\) actually end up giving Legendre polynomials of \(\cos\phi\).
+\begin{equation}
+\frac{1}{\sqrt{1 - 2\left(\frac{r}{R}\right)\cos\phi + \left(\frac{r}{R}\right)^2}} = \sum_{n=0}^\infty P_n(\cos\phi)\left(\frac{r}{R}\right)^n
+\end{equation}
+Recall that
+\[\int_0^2\pi \cos^{2n+1}\phi\d\phi=0\qquad \qquad \int_0^2\pi \cos^2\phi\d\phi = \pi\]
+Then, the integral (to third order) becomes:
+\begin{align*}
+	\Phi &= -G\lambda \int_0^{2\pi}1+\left(\frac{r}{R}\right)\frac{3\cos^2\phi-1}{2}\d\phi\\
+	&=-G\lambda \left[2\pi +\left(\frac{r}{R}\right)\frac{3\pi-2\pi}{2}\right]\\
+	&=-G\lambda 2\pi\left[1+\frac{1}{4}\left(\frac{r}{R}\right)^2\right]\\
+	&=-\frac{GM}{R}\left[1+\frac{1}{4}\left(\frac{r}{R}\right)^2\right]
+\end{align*}
+The equilibrium point once again occurs at \(r=0\). However, when we test the stability,
+\[\pder{\Phi}{r2}=-\frac{GM}{2R^3}<0\]
+which is unstable.
+

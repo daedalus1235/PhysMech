@@ -1,0 +1,353 @@
+%! TEX root = 0-main.tex
+\chapter{Central Force Motion}
+\subsection{Newtonian}
+For a two-body problem, a central force is one that acts only along the direction of the radial vector between the two bodies:
+\[F=F_{12}\frac{r_1-r_2}{\norm{r_1-r_2}^2}\]
+Gravity, for example, gives this force as
+\[F=-\frac{Gm_1m_2}{\sr^2}\hat\sr\]
+From newton's third law, we additionally have
+\[m_1\ddot r_1 + m_2\ddot r_2 = 0\]
+integrating,
+\[m_1r_1 + m_2 r_2 = At+B\]
+\[\frac{m_1 r_1 + m_2 r_2}{m_1+m_2} = \frac{At+B}{m_1+m_2}\]
+We define the LHS vector as the centre of mass, \(\vv R\), while the RHS provides a velocity \(\vv{v}_{cm}\)
+We typically transform to the frame \(\vv{R}=0\) when using the Newtonian approach.
+
+\subsection{Lagrangian}
+The Lagrangian of this system can be written
+\begin{equation}
+	L=\frac{1}{2}(m_1+m_2)\dot {\vv R} ^2+ \frac{1}{2}\mu \dot {\vv r}^2-U(r)
+\end{equation}
+where 
+\[\mu = \frac{m_1m_2}{m_1+m_2}\]
+is the reduced mass and little \(\vv r\) is the distance between the two particles.  As there is no dependence on \(R\), it is a cyclic parameter
+\[p_R = \pder{L}{\dot {\vv{R}}}\]
+Thus, we transform to the frame where \(\dot {\vv R} = 0\) yielding
+\[L=\frac{1}{2}\mu \dot{\vv r}^2-U(r)\]
+
+It can easily be seen that the motion of the 2-body system is limited to a plane:
+\[\vv{r}\times\left(m\ddot{\vv r}-F_r\hat r\right)= \vv r \times 0=0\]
+\[\then \vv r \times \ddot {\vv r} = 0\]
+Using product rule,
+\[\der{}{t}\left(\vv r \times \dot {\vv r}\right) = \cancel{\dot{\vv r} \times\dot{\vv r}} + \vv r \times \ddot {\vv r} = 0\]
+and so, the motion of the particle is restricted such that
+\[\vv r \times \dot{\vv r} = \vv h\]
+or the motion is in a plane normal to the vector \(\vv h\). Thus, in polar coordinates
+\begin{equation}
+	L = \frac{1}{2}\mu \left(\dot r ^2 + r^2 \dot \theta^2 \right)-U(r)
+\end{equation}
+This doesn't depend on \(\theta\), so it is a cyclic coodinate. Thus, angular momentum
+\[p_\theta = \pder{L}{\dot\theta}=\mu r^2\dot\theta = \ell\]
+is a conserved quantity.
+
+\subsubsection{Areal Velocity}
+If we imagine the particle as orbiting an ellipse with a focus at the origin, the area swept by the orbit over a given time is constant. For a small time \(\delta t\), the area can be approximated
+\[A=\frac{1}{2}ab\sin\theta\]
+\[\delta A = \frac{1}{2} r(r+\delta r) \sin\delta\theta\]
+\[\d{A}=\frac{1}{2}r^2\d{\theta}\]
+\[\der{A}{t}=\frac{1}{2}r^2\der{\theta}{t}=\ell\]
+and so, the amount of area sewpt out in a time \(t\) is independent on the location on the orbit. This is known as Kepler's Second Law: an orbit will sweep an equal area for an equal time. Interestingly, this applies for \emph{any} central force---it results from the conservation of angular momentum.
+
+\subsection{Hamiltonian}
+Because the potential and coordinates are independent of time and the potential also of velocity, we can write the hamiltonian as:
+\[E=H=\frac{1}{2}\mu\left(\dot r^2 + r^2 \dot \theta^2\right)+U(r)\]
+or
+\begin{equation}
+	H = \frac{1}{2}\mu\dot r^2 + \frac{\ell^2}{2\mu r^2}+U(r)
+\end{equation}
+To characterize the motion, we want to know, obviously, the quantities \(r(t),\theta(t)\), but also it is useful to know \(r(\theta)\) and \(\theta(r)\). From the total energy, 
+\[\der{r}{t}=\dot r = \sqrt{\frac{2}{\mu}\left(E-\frac{\ell^2}{2\mu r^2}-U(r)\right)}\]
+\[\d{t}=\frac{\d{r}}{\sqrt{\frac{2}{\mu}\left(E-\frac{\ell^2}{2\mu r^2}-U(r)\right)}}\]
+While difficult it may be difficult to compute, we will obtain an equation \(t(r)\) that we can invert to find \(r(t)\)
+
+From the conservation of angular momentum, we aditionally have
+\[\der{\theta}{t}=\dot\theta = \frac{\ell}{\mu r^2}\]
+\[\theta(t) = \frac{\ell}{\mu}\int_{t_0}^{t}\frac{\d{t}}{r^2}\]
+
+Finally, we can use chain rule to find
+\[\der{\theta}{r} = \der{\theta}{t}\der{t}{r} = \frac{\dot\theta}{\dot r}=\frac{\ell/\mu r^2}{\sqrt{\frac{2}{\mu}\left(E-\frac{\ell^2}{2\mu r^2}-U(r)\right)}}\]
+integrating, we will find \(\theta(r)\). However, we are usually more interested in the orbit equation, \(r(\theta)\).
+
+\subsection{Orbit Equation}
+Returning to the Lagrangian
+\[L=\frac{1}{2}\mu\left(\dot r^2 + r^2\dot\theta^2\right)-U\]
+we can apply Euler Lagrange as
+\begin{align*}
+	0&=\pder{L}{r}-\der{}{t}\pder{R}{\dot r}\\
+	 &=\mu r \dot \theta^2 - \pder{U}{r} +\der{}{t}\mu\dot r\\
+	F(r)&= \mu\ddot r - \frac{\ell^2}{\mu r^3}
+\end{align*}
+making the substitution \(r = u^{-1}\) such that \(r = r(u(\theta(t)))\),
+\[\der{r}{t} = \der{r}{u}\der{u}{\theta}\der{\theta}{t}=\der{}{u}\left[\frac{1}{u}\right]\der{u}{\theta}\dot\theta = -\frac{1}{u^2}*\frac{\ell}{\mu r^2}\der{u}{\theta} = -\frac{\ell}{\mu}\der{u}{\theta}\]
+Then, the second derivative is
+\[\der{r}{t} = -\frac{\ell}{\mu}\der{u}{\theta2}\der{\theta}{t} = -\frac{\ell^2 u^2}{\mu^2}\der{u}{\theta2}\]
+The equation of motion then becomes
+\[\der{u}{\theta2}+u = -\frac{\mu}{\ell^2}*\frac{1}{u^2}F(\tfrac{1}{u})\]
+This equation can be used to verify if an orbit equation is caused by a central force, and if so, by what. More interestingly, For certain forces, this equation is integrable, and an exact solution may be obtained.
+
+\begin{aside}[Force from an orbit]
+Take an orbit with \(r = k\theta^2\). We obviously have \(u = \frac{1}{k\theta^2}\). Thus,
+\[\der{u}{\theta2} = \frac{6}{k\theta^4}=6ku^2\]
+The orbit equation becomes
+\[6ku^2+u = -\frac{\mu}{\ell^2}*\frac{1}{u^2}F(u^{-1})\]
+Solving,
+\[F(u^{-1}) = -\frac{\ell^2}{\mu}(6ku^4+u^3)\]
+\[F(r) = -\frac{\ell^2}{\mu}\left(\frac{6k}{r^4}+\frac{1}{r^3}\right)\]
+The equation of motion becomes
+\[\dot\theta = \frac{\ell}{u r^2} = \frac{\ell}{uk^2\theta^4}\then\boxed{\theta = \left(\frac{5\ell}{\mu k^2}t+C\right)^{1/5}}\then \boxed{r = k\theta^2 = k\left(\frac{5\ell}{\mu k^2}t +C\right)^{2/5}}\]
+\end{aside}
+
+If the force, for example, follows an inverse square law
+\[F=-\frac{k}{r^2}\]
+the orbit equation becomes
+\[\der{u}{\theta2}+u = \frac{\mu k}{\ell^2}\]
+This equation has solutions of the form
+\[u = \frac{\mu k}{\ell^2}\left[1+e\cos(\theta - \theta_0)\right]\]
+or
+\begin{equation}
+	r = \frac{\ell^2/\mu k}{1+e\cos(\theta - \theta_0)}\label{eq5:oe}
+\end{equation}
+for some coefficent \(e\). This corresponds to an elliptical orbit whose properties can be easily seen from the equation.
+
+\subsubsection{Effective Potential Energy}
+The total energy can be written
+\[E = \frac{1}{2}\mu\dot r^2 + \frac{\ell^2}{2\mu r^2} + U(r)\]
+If we combine the centrifugal term \(\ell^2/2\mu r^2\) with the potetial \(U(r)\), we obtain the ``effective potential''
+\[E=\frac{1}{2}\mu\dot r^2 +  V(r)\]
+where
+\begin{equation}
+	V = \frac{\ell}{2\mu r^2}+U
+\end{equation}
+Inserting the gravitational potential,
+\[V = \frac{\ell^2}{2\mu}*\frac{1}{r^2}-k*\frac{1}{r}\]
+When \(E<0\), the radial distance will oscillate in the well defined by \(V\). When the particle is at the minimum of the effective potential, the particle will have a perfectly circular orbit.
+
+The turning point for \(E_{\min}<E<0\) determines the minimum and maxima radia for Equation~\ref{eq5:oe}. Fixing \(r_{\min}=r(\theta_0)\), and solving the energy,
+\[r_{\min} = \frac{1}{A+\frac{\mu k}{\ell^2}}\]
+\[E=\frac{\ell^2}{2\mu r_{\min}^2}-\frac{k}{r_{\min}}\]
+\begin{equation}
+	r(\theta) = \frac{\alpha}{1+e\cos\theta}
+\end{equation}
+where
+\[\alpha = \frac{\ell^2}{\mu k} \qquad\qquad e = \sqrt{1+\frac{2E\alpha}{k}}\]
+
+For the the eccentricity, \(e\) to be real, the minimum energy is
+\[E_{\min}=-\frac{k}{2\alpha} = -\frac{\mu k^2}{2\ell^2}\]
+The eccentricity is a property of an ellipse that denotes how much it ``deviates'' from being circular---\(e=0\) is a circle while \(0<e<1\) causes the ellipse to be more elongated. It is important to note that the particle will alway orbit around a focus of the ellipse. Once the energy becomes \(0\), the eccentricity becomes \(e=1\) and the orbit is a parabola. When the energy grows greater and the eccentricity exceeds \(e>1\), the orbit takes the shape of a hyperbola. Collectively, these shapes are conic sections, and the higher energies can be interpreted as taking a steeper cut on a cone of position.
+
+The quantity \(\alpha\) has a different interpretation for each type of orbit; for a circle, \(\alpha\) corresponds to the radius, for an ellipse the semimajor axis, and for a parabola twice the closest approach.
+
+Returning to elliptical orbits, a typical ellipse can be written
+\[\frac{x^2}{a^2} + \frac{y^2}{b^2}\]
+In a geometry sense, the ellipse is the locus of all points such the perimeter of the triangle defined by two given points (foci) and the third point is a constant. The semiminor axis is half the shortest axis of the ellipse, while the semimajor axis is the half the longest axis of the ellipse. For an elliptical orbit, the semimajor axis will always be represented by \(a\), and the semimajor axis by \(a\). The focus is a point defined such that
+\[f^2=a^2-b^2\]
+Transforming the ellipse to be centered on one focus \(+f\), the ellipse can be rewritten
+\[1 = \frac{(x+f)^2}{a^2}+\frac{y^2}{b^2}\]
+This transformation shows that the orbit is defined by one particle at the focus of the elliptical orbit of the other; this is Kepler's first law. Inserting polar coordinates and solving,
+\begin{equation}
+	r(\theta) = \frac{b^2/a}{1+\frac{f}{a}\cos\theta}
+\end{equation}
+
+Thus,
+\[\alpha = \frac{b^2}{a} \qquad\qquad \frac{\sqrt{a^2-b^2}}{a}\]
+solving,
+\begin{subequations}
+	\begin{align*}
+		a&=\frac{\alpha}{1-e^2} = \frac{k}{2\abs{E}}\\
+		b&=\frac{\alpha}{\sqrt{1-e^2}} = \frac{\ell}{\sqrt{2\mu\abs{E}}}
+\end{align*}
+\end{subequations}
+
+Thus, the semimajor axis depends solely on the conserved quantity of total energy, while the semiminor (and thus eccentricity) also depends on the conserved quantity angular momentum
+
+One final way to rewrite the orbit equation, in terms of the semi-major axis \(a\) and the eccentricity \(e\), 
+\begin{equation}
+	r(\theta) = \frac{a(1-e^2)}{1+e\cos\theta}
+\end{equation}
+
+\section{Kepler's Third Law}
+Using the fact that the area of an ellipse is given \(A=\pi ab\), we can obtain the area of encircled by the orbit is given
+\[A=\frac{\pi k\ell}{\sqrt{8\mu \abs{E}^3}}\]
+Further, knowing that \(\d{A}{t}=\frac{\ell}{2\mu}\), we can integrate to obtain 
+\[A=\int_0^A\d{A}=\int_0^\tau\frac{\ell}{2\mu}\d{t}=\frac{\ell}{2\mu}\tau\]
+for the orbital period \(\tau\). Setting the two equations equal, we obtain
+\[\frac{\pi^2k^2}{2\abs{E}^3}=\frac{\tau^2}{\mu}\]
+Substituting the expression for the semi-major axis, we obtain Kepler's third law,
+\begin{equation}
+	\tau^2 = \frac{4\pi^2\mu}{k}a^3=\frac{4\pi^2}{G(m_1+m_2)}a^3
+\end{equation}
+
+\section{Kepler's Laws and Useful Relations}
+We have show, from first principles, each of Kepler's laws:
+\begin{enumerate}[label = \Roman*.]
+	\item Planets move in elliptical orbits around the Sun with the Sun at one focus.
+	\item The area per unit time swept out by a radius vector from the Sun to a planet is constant.
+	\item The square of the radius is proportional to the cube of the semi-major axis.
+\end{enumerate}
+
+\subsection{Useful Points}
+The point of closest approach to the ellipse is known as the pericenter of the ellipse. From the orbit equaiton, we can clearly see that this occurs at
+\[r(\theta=0)=\frac{a(1-e^2)}{1+e}=a(1-e)\]
+Similarly, the farthest point, the apocenter, is given
+\[r(\theta=\pi)=a(1+e)\]
+
+\subsection{Angular Momentum}
+Recall that 
+\[e = \sqrt{1+\frac{2E\ell^2}{\mu k^2}}\qquad\qquad a = -\frac{k}{2E}\]
+Inverting these relations, we obtain
+\[E = -\frac{k}{2a} \qquad\qquad \ell = \sqrt{\mu k a (1-e^2)}\]
+From this, we see that as \(e\to 1\), \(\ell\to 0\), so eccentric orbits have less angular momentum than a circular orbit, explaining why elliptical orbits are more stable than circular orbits.
+
+From kepler's second law, and also from the conservation of energy, as the pericenter has the lowest potential energy and thus must also have the highest kinetic energy:
+\[E=\frac{1}{2}\mu v^2 -\frac{k}{r}\then v=\sqrt{\frac{2}{\mu}\left(E-\frac{k}{r}\right)}=\sqrt{\frac{k}{\mu}\left(\frac{2}{r}-\frac{1}{a}\right)}\]
+Plugging in the positions of the peri-/apocenter,
+\begin{subequations}
+	\begin{align*}
+		v_{peri}&=\sqrt{\frac{k}{\mu a}\left(\frac{1+e}{1-e}\right)}\\
+		v_{apo}&=\sqrt{\frac{k}{\mu a}\left(\frac{1-e}{1+e}\right)}
+	\end{align*}
+\end{subequations}
+
+\subsubsection{Transfer Orbit}
+Suppose we consider the system of the Earth and Mars orbiting the Sun, which has solar mass \(M_\odot\). While it might seem more reasonable to wait for Mars and Earth to be closest, it is actually easier if Mars and Earth are on opposite sides of the Sun, so that the probe's perihelion is at the Earth, and the apohelion is at Mars. Thus, one velocity boost is required to go from the ``circular'' Earth orbit to the elliptical orbit, then another velocity boost to go from the elliptical orbit the ``circular'' Martian orbit. This transfer orbit is one of the most energy efficient maneouvres between the two bodies.
+
+The velocity of the earth orbit is given
+\[v_e = \sqrt{\frac{k}{\mu}\left(\frac{2}{r_e}-\frac{1}{a_e}\right)}\approx\sqrt{\frac{GM_\odot}{r_e}}\]
+For the transfer orbit, the semimajor axis can be found
+\[a = \frac{r_m+r_e}{2}\]
+and so the velocity at the perihelion of the transfer orbit can be found
+\[v_p=\sqrt{GM_\odot\left(\frac{2}{r_e}-\frac{2}{r_m+r_e}\right)}=\sqrt{\frac{2GM_\odot}{r_e}\left(\frac{r_m}{r_e+r_m}\right)}\]
+This gives a \(\Delta\)-v of 
+\[v_{boost}=v_p-v_e\]
+Then, at the apoheliun, the velocity is initially
+\[v_a=\sqrt{\frac{2GM_\odot}{r_m}\left(\frac{r_e}{r_2+r_m}\right)}\]
+with
+\[v_m=\sqrt{\frac{GM_\odot}{r_m}}\]
+giving a \(\Delta v\) of 
+\[v_{circ}=v_m-v_a\]
+The time taken to transfer from earth orbit to mars orbit is half of the period of the transfer orbit, yielding
+\[t= \frac{\tau}{2}=\frac{1}{2}\sqrt{\frac{4\pi^2 a^2}{GM_\odot}} = \pi\sqrt{\frac{(r_m+r_m)^3}{2^3GM_\odot}}\approx \SI{0.7}{years}\]
+A similar estimation puts the transfer orbit to go to pluto yields \SI{47}{years}.
+
+The transit time for Curiosity to Mars was about the same that was computed, while New Horizons took only about \SI{10}{years} to make the transit. This is because New Horizons took a boost orbit around Jupiter
+
+\subsection{Boost Orbit}
+A boost orbit is akin to a hyperbolic orbit, albeit with the centre planet also moving. In the rest frame of, say Jupiter (in the case of New Horizons), the probe has incoming and outgoing velocity \(v_0\); however, transfering to the rest frame of the solar system, Jupiter would have velocity \(v_p\), so the incoming velocity of the probe would be \(v_i = v_0-v_p\) and \(v_f = v_0+v_p\), so the probe gains velocity \(2v_p\). This was assuming the incoming and outgoing velocities were parallel; if they are not, considerations must be taken to correct for the angle
+
+\section{Stability of Circular Orbits}
+Recall that the radius of a circular orbit (for the Kepler Problem) is the minimum defined by the effective potential
+\[V = U+\frac{\ell^2}{2\mu r^2}\]
+Given a force \(F = -k/r^n\), the effective potential is given
+\[V = -\frac{k}{n-1}*\frac{1}{r^{n-1}}+\frac{\ell^2}{2\mu}*\frac{1}{r^2}\]
+The minimum radius can then be found
+\[0=\pder{V}{r}=\frac{k}{r_c^n}-\frac{\ell^2}{\mu}*\frac{1}{r_c^3}\then r_c^{n-3} = \frac{\mu k}{\ell^2}\]
+To evaluate the stability, we examine the second derivative of the effective potential:
+\[\at{\pder{^2V}{r^2}}{r=r_c}=-nk\frac{1}{r_c^{n+1}}+\frac{3\ell^2}{\mu}*r_c^4 = \frac{1}{r_c^4}\left(-nk\frac{1}{r_c^{n-3}}+\frac{3\ell^2}{\mu}\right)=\frac{\ell^2}{\mu r_c^4}*(3-n)\]
+Thus, for \(n<3\), the circular orbits are stable.
+
+\subsection{Closed Orbits}
+Take a perturbed orbit
+\[r = r_c+\eta\]
+Taylor expanding the effective potential, we obtain
+\[V(r)\approx V(r_c)+\cancelto{0}{\eta\at{\pder{V}{r}}{r=r_c}}+\frac{1}{2}\eta^2\at{\pder{^2V}{r^2}}{r=r_c}=V(r_c)+\frac{1}{2}k\eta^2\]
+where
+\[k\equiv \frac{\ell^2}{\mu r_c^4}(3-m)\]
+This gives an oscillation frequency
+\[\omega_r = \frac{\ell}{\mu r_c^2}\sqrt{3-n}\]
+This frequency is the radial oscillation of the orbit. 
+Recall we defined \(\ell = \mu r_c^2 \dot\theta\), allowing us to rewrite the radial frequency as
+\[\omega_r = \sqrt{3-n}\omega_\theta\]
+From this, we can interpret an elliptical orbit for an inverse square law as having \(\omega_\theta=\omega_r\).
+so \emph{any} perturbation off of a circular orbit makes an elliptical orbit.
+
+If we instead have a hookean force \(F = -k(r-r_c)\) we have
+\[\omega_r = 2\omega_\theta\]
+which gives a peanut-shaped orbit.
+
+These two orbits are \emph{closed orbits}, In general, because \(\sqrt{3-n}\) is usually not an integer, the orbit precesses an amount \(\Delta\theta\) each orbit:
+\begin{equation}
+	\Delta\theta = 2\int_{r_{\min}}^{r_{\max}}\frac{\ell/r^2}{\sqrt{2\mu\left(E-U-\frac{\ell^2}{2\mu r}\right)}}\d{r}
+\end{equation}
+An orbit is considered closed if there exists a rational number \(\frac{a}{b}\) such that
+\[\Delta \theta = \frac{a}{b}2\pi\]
+For examle, the Kepler problem has
+\[\Delta\theta = \frac{1}{1}*2\pi\]
+while a pentagram-like orbit would have
+\[\Delta\theta = \frac{2}{5}*2\pi\]
+For a general power-law force \(F=-kr^{-n}\), closed orbits are given by
+\begin{equation}
+	\frac{a}{b}=\sqrt{3-n}
+\end{equation}
+This gives rise to \emph{Bertrand's Theorem}, which states that the only two central forces where every bound orbit is a closed orbit are \(n=2\) and \(n=-1\).
+
+\section{Virial Theorem}
+Let there be bodies at \(r_i\) with momentum \(p_i\).  We can define the quantity
+\begin{equation}
+	S = \int_ir_i*p_i
+\end{equation}
+Assuming \(S\) is bounded, we can take the derivative wrt time
+\begin{align*}
+	\der{S}{t} &= \sum_i\dot r_i*p_i+r_i*\dot p_i\\
+		   &=\sum_i \frac{p_i^2}{m}+r*F_i\\
+		   &=\sum_i 2T_i+F_i*r_i
+\end{align*}
+Taking the time average, \(\vect{x} = \frac{1}{\tau}\int_0^\tau x\d{t}\)
+\[\left\langle \der{S}{t}\right\rangle = \left\langle \sum_i2T_i \right\rangle + \left\langle \sum_i F_i*r_i\right\rangle\]
+Applying the fundamental theorem of calculus,
+\[\left\langle \der{S}{t}\right\rangle = \frac{1}{\tau}\left[S(\tau)-S(0)\right]\]
+Because we take the assumption that \(S\) is bounded, as \(\tau\to\infty\), \(\vect{\dot S}\to 0\). Thus,
+\begin{equation}
+	\vect{T}=-\frac{1}{2}\left\langle\sum_iF_i*r_i\right\rangle
+\end{equation}
+where the RHS is known as the \emph{virial} of the system.
+\begin{aside}[Ideal Gas]
+	Let there be an ideal gas inside a box. The force on a small element of the box is given
+	\[\d{F_{wall}} =-\d{F_{atom}}= P\d{A}\]
+	The virial is then
+	\[-\frac{1}{2}\left\langle\sum_iF_i*r_i\right\rangle = -\frac{1}{2}\left\langle\oint\d{F_{atom}}*r\right\rangle=\frac{1}{2}\left\langle\oiint_{\partial V} P\d{a}*r\right\rangle=\frac{P}{2}\oiint_{\partial V} r*\d{a}\]
+	Using virial theorem, 
+	\[\vect{T}=\frac{P}{2}\oiint_{\partial V}r*\d{a} = \frac{P}{V}\iiint_V\del*r\d{V}=\frac{1}{2}P\iiint 3 V=\frac{3}{2}PV\]
+	We also know, by Equipartition Theorem in thermodynamics, that 
+	\[\vect{T}=\frac{3}{2}Nk_B T_{emp}\]
+	Combininge these two equations, 
+	\[PV=Nk_BT_{emp}\]
+	yielding the Ideal Gas Law.
+\end{aside}
+
+\subsection{Virial theorem for specific forces}
+Assume the force take the form of a central power law
+\[F_i = -\frac{k}{r_i^n}\hat r_i\]
+Thus, the potential is given
+\[F_i-\del_iU_i\then U_i = -\frac{k}{n-1}*\frac{1}{r_i^{n-1}}\]
+Calculating the virial
+\[\sum_iF_i*r_i = \sum_i - \frac{k}{r_i^{n-1}}=\sum_i(n-1)U_i=(n-1)U\]
+Thus,
+\begin{equation}
+	\vect{T}=-\frac{n-1}{2}\vect{U}\label{eq5:virialthm}
+\end{equation}
+Equation~\ref{eq5:virialthm} is known as the virial theorem for the \(F=-k/r^n\) force.
+For example, the virial theorem fot a simple harmonic oscilliator, with \(n=-1\), we have
+\[\vect{T}=\vect{U}\]
+For an inverse-square law, 
+\[\vect{T}=-\frac{1}{2}\vect{U}\]
+Thus, for gravity,
+\[E = \vect{T}+\vect{U}=-\vect{T}\]
+\subsection{Orbits}
+Assume the earth orbits with \(e=0, a=r_e, m_e\gg M_\odot\). Thus,
+\[T=\frac{1}{2}m_ev^2 = \frac{1}{2}m_2\left[GM_\odot\left(\frac{2}{r}-\frac{1}{a}\right)\right]=\frac{Gm_eM_\odot}{2r}\]
+The potential is given
+\[U=-\frac{Gm_eM_\odot}{r_e} = -2T\]
+so the virial equation is satisified by circular orbits. If instead we choose a satelite with perihelion \(r_p=a(1-e),a=2r_e,e=\frac{1}{2}\), the kinetic energy at the perihelion is instead given
+\[T=\frac{Gm_eM\odot}{2}\left(\frac{2}{r_e}-\frac{1}{2r_e}\right)=\frac{3Gm_eM_\odot}{4r_e}\]
+with 
+\[T=-\frac{3}{4}U\]
+which does not satisfy the virial theorem; however that is because these are instantaneous values of \(T,U\) rather than time average. To calculate the time average, we can take the orbital period as the value for \(\tau\) to get the average.
+\begin{align*}
+	\vect{U} &= \frac{1}{\tau}\int_0^\tau \frac{-Gm_eM_\odot}{r(t)}\d{t}\\
+	\intertext{making a change of variable,}
+		 &=-\frac{Gm_eM_\odot\mu}{\gamma \ell}\int_0^{2\pi}r\d\theta\\
+		 &=-Gm_eM_\odot a \left(1-e^2\right)^2
+\end{align*}
+Similarly, the average kinetic energy can be found
+\[\vect{T}=\]
+The virial theorem was used to show the existence of dark matter; the Coma Cluster had a higher effective mass than would be predicted by intensity alone.

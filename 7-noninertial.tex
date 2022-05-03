@@ -1,0 +1,267 @@
+%! TEX root = 0-main.tex
+\chapter{Noninertial Reference Frames}
+\section{Rigid Body Dynamics}
+Consider an arbitrary body rotating about an axis through its centre of mass. Define the axis to be \(z\), and consider the cyllindrical coordinates defined accordingly. We define a rigid body to be one such that for any mass element \(\d{m_i}\) at point \(\vv \pi_i\), the point moves such that \(\dot r_i = \dot z_i = 0\). 
+
+The velocity of the mass element is given
+\[\vv v_i = \dot {\vv \pi}_i = \der{}{t}\left[r_i\e{r} + z_i\e{z}\right] = \dot r_i \e{r} + r_i \dot {\hat r} + \dot z_i \e{z}+z_i\dot{\hat z}\]
+Substituting our definition of a rigid body, this reduces simply to
+\[\vv v_i = r_i \dot\theta \e\theta\]
+In a slightly different form, we know
+\[\vv\omega = \dot\theta\hat z\]
+Computing the cross product,
+\[\vv v_i = \vv\omega \times \vv\pi_i = r_i\dot\theta(\e{z}\times\e{r}) + z_i\dot\theta(\e{z}\times\e{z}) = r_i\dot\theta\e\theta\]
+\begin{equation}
+	\vv v_i = \vv \omega \times \vv \pi_i
+\end{equation}
+we can equivalently write this as
+\[\vv v_i = \vv\omega\times\vv r_i\]
+as the parallel component doesn't contribute anything\footnote{\(\vv r_i = r_i \e{r}\)}.
+
+Similarly, we compute the acceleration
+\[\vv a_i = \dot {\vv v}_i = r_i \ddot\theta \e\theta - r_i \dot\theta^2\hat r\]
+We can rewrite the first term using  cross products to obtain
+\begin{equation}
+	\vv a_i = \vv \alpha \times \vv \pi + \vv\omega \times (\vv\omega \times \vv \pi_i)
+\end{equation}
+where \(\vv \alpha = \dot{\vv \omega}\).
+
+We can find the rotational kinetic energy by substituting \(\vv v_i = \vv\omega \times \vv r_i\)
+\begin{align}
+	T&= \frac{1}{2}\sum_i m_i (\vv\omega\times \vv r_i) * (\vv\omega\times\vv r_i)\nonumber\\
+	 &=\frac{1}{2}\sum_i m_i \left[ (\vv \omega*\vv\omega)(\vv r_i *\vv r_i) - \cancelto{0}{(\vv r_i * \vv\omega)}\cancelto{0}{(\vv\omega*\vv r_i)}\right]\nonumber\\
+	 &=\frac{1}{2}\omega^2\sum_i m_i r_i^2
+\end{align}
+The quantitiy in the summation is defined to be the \emph{moment of inertia} about an axis.
+\begin{equation}
+	I = \sum_i m_i r_i^2 = \int\d{m}r^2
+\end{equation}
+For example, we can compute the moment of inertia of a ring about its axis using
+\[\d{m} = \left(\frac{m}{2\pi a}\right) \d{\ell}\]
+where \(\d\ell = a\d\theta\)
+Thus,
+\[I = \int \d{m} r^2 = \int_0^{2\pi} \frac{m}{2\pi a} a^2 * a\d\theta = m a^2\]
+Similarly, we can compute the moment of inertial of a solid disk through its axis as
+\[I = \frac{1}{2} ma^2\]
+Finally, consider the moment of inertial of a ring about a diameter. The mass element can be written
+\[\d{m} = \frac{m}{2\pi a} \d{s}\]
+where
+\[\d{s} = a\d\theta\]
+Thus, the integral becomes
+\[I = \int_{0}^{2\pi} r^2\frac{m\d\theta}{2\pi} = \int_0^{2\pi}a^2\sin^2\theta\frac{m\d\theta}{2\pi} = \frac{1}{2}ma^2\]
+Other useful moments of inertia are a spherical shell about its centre
+\[I = \frac{2}{3}ma^2\]
+and of a solid sphere about its centre
+\[I = \frac{2}{5}ma^2\]
+
+\subsection{Angular Momentum}
+The angular momentum of a specific mass element is given
+\[\vv L_i = \vv{\pi_i}\times \vv p_i\]
+which yields
+\[\vv L = \sum_i m_i \vv \pi_i \times(\vv\omega_i \times \vv\pi_i) = \sum_i m_i \vv \pi^2 \vv\omega - (\vv\pi_i \times \vv\omega)\pi_i\]
+Where we used the BAC-CAB rule of the triple vector product. Simplifying, we obtain
+\[\vv L = \left[\sum_i m_i r_i^2\right]\vv\omega - \left[\sum_i m_i r_i z_i \e r\right]\omega\]
+We recognize the first term as simply \(I\vv\omega\), which we expected. The second term can be rewritten by expanding out \(r_i \e{r} = x_i \e{x} + y_i \e{y}\)
+\[-\sum_i m_i x_i z_i \e x - \sum_i m_i y_i z_i\e y\]
+Essentially, if an object is symmetric about its axis of rotation, this secondary term vanishes; otherwise, it makes a contribution which causes the angular momentum to be on a different axis from the rotation.
+
+\section{Non-Inertial Frames}
+Consider a fixed system defined by the axes \(x_i'\) and an origin \(O'\), as well as a a moving system \(x_i\) with origin \(O\). Define a vector
+\[\vv R(t) = O-O'\]
+First, assume that there is neither rotation nor acceleration. The position of a stationary point in the moving frame, \(P\), is given in each frame as
+\[\vv r = P-O = \sum x_i \e{i}\]
+For ease of computation, we restrict \(\vv R(t) = \vv v t\). Thus, we have the position of the point in the fixed basis as
+\[\vv r' = \vv R + \vv r = \sum_i v_i t \e{i}' + x_i\e{i}\]
+However, we have assumed no rotation; this fixes \(\e{i}'=\e{i}\), so we can write
+\[\vv r'(t) = \sum_i (v_it+x_i)\e{i}'\]
+Taking the time derivative of this position, we get a constant vector:
+\[\dot{\vv r}' = \sum_i v_i \e{i}' = \vv v\]
+Both of these frames are inertial, as a constant velocity is maintained in the absence of forces.
+
+\subsection{Accelerating Frame}
+Now, let the un-primed frame accelerate with
+\[\vv a = \sum_i a_i\e{i}'\]
+again, for simplicity, we let
+\[\vv R(t) = \frac{1}{2}\vv a t^2\]
+Once again, this yields
+\[\vv r' = \sum_i (\frac{1}{2}a_i t^2  + x_i)\e{i}'\]
+Consider a point \(P'\) which is stationary in the fixed system. In the accelerating system, this point can be denoted by
+\[\vv r = \vv r' - \vv R\]
+When we take the derivatives, we find that although no forces are applied to the point, 
+\[\ddot{\vv r} = -\vv a\]
+so the moving frame is non-inertial.
+
+If instead, we consider \(P'\) to be the position of a mass that has a force being applied to it. Then, we see
+\[\vv F_{eff} = m\der{\vv r}{t2} = m\der{\vv r'}{t2}-m\vv a\]
+or, more succinctly
+\[\vv F_{eff} = \vv F - m\vv a\]
+We consider the quantity \(\vv F = m \vv a'\) a real force, while \(m\vv a\) is a fictitous force arising entirely due to the accelerating reference frame.
+
+\subsection{Rotating Frame}
+Assume the origins of the two systems coincide. Clearly, we no longer have \(\e{i} = \e{i}'\). We can obtain coefficients of expansion by taking dot products:
+\[x_i' = \e{i}' \vv r = \lambda_{i1}x_1+\lambda_{i2}x_2+\lambda_{i3}x_3\]
+until we obtain a matrix
+\[ \begin{pmatrix}
+	x_1'\\
+	x_2'\\
+	x_3'
+\end{pmatrix} = \begin{pmatrix}
+\lambda_{11} & \lambda_{12} & \lambda_{13}\\
+\lambda_{21} & \lambda_{22} & \lambda_{23}\\
+\lambda_{31} & \lambda_{32} & \lambda_{33}
+\end{pmatrix}
+\begin{pmatrix}
+	x_1\\
+	x_2\\
+	x_3
+\end{pmatrix}\]
+Consider a rotation of with angle \(\theta\) going from \(\e1\to\e1'\) about \(\e3\). The corresponding transformation matrix is
+\[\lambda = \begin{pmatrix}
+	\cos\theta & \sin\theta & 0\\
+	-\sin\theta & \cos\theta & 0\\
+	0 & 0 & 1
+\end{pmatrix}\]
+
+\subsection{Translation and Rotation}
+Consider a frame that is both translating and rotating. We wish to determine the fictitous forces, and consequently the effective forces. Once again, consider a fixed frame defined by \(\e i'\) and a rotating frame defined by \(\e i\), with origins separated by \(\vv R\). Let the rotating frame have angular velocity \(\vv \omega\) as viewed from the fixed frame.
+
+Consider a position vector in the rotating system, \(\vv r\). We can write it in the fixed frame as
+\[\vv r' = \vv R + \vv r\]
+
+we want to find (wrt the fixed system)
+\[\at{\der{\vv r'}{t}}{\text{rotating}} = \cancelto{0}{\der{\vv R}{t}} + \sum_i \der{x_i}{t}\e i + x_i \dot{\hat e}_{i}\]
+The quantity 
+\[\sum_i\der{x_i}{t}\e i = \at{\der{\vv r}{t}}{\text{rotating}}\]
+We then need to compute the second term. Consider an infinitessimal rotation \(\d{\vv\theta}\). We then have
+\[\d{\hat e_i} = \d{\vv \theta} \times\hat e_i\]
+thus, we have
+\[\dot{\hat e}_i = \der{\hat e_i}{t} = \der{\vv\theta}{t}\times \hat e_i = \vv\omega\times \hat e_i\]
+so, we obtain
+\begin{equation}
+	\at{\der{\vv r'}{t}}{\text{fixed}} = \at{\der{\vv r}{t}}{\text{rotating}} + \vv\omega\times \vv r
+\end{equation}
+
+We can easily change this to include translating, rotating frames as
+\begin{equation}
+	\vv v_f = \vv V + \vv v_r + \vv\omega\times\vv r
+\end{equation}
+where \(\vv V = \dot {\vv R}\)
+
+Thus, we can find fictitous forces by differentiating wrt to the fixed frame:
+\begin{align*}
+\at{\der{\vv v_f}{t}}{\text{fixed}} &=\at{\der{\vv V}{t}}{\text{fixed}} +\at{\der{\vv v_r}{t}}{\text{fixed}} +\at{\der{}{t}\left(\vv\omega\times\vv r\right)}{\text{fixed}}\\
+				    &=\ddot{\vv R}_f + \vv a_r +2\omega\times \vv v_r + \dot{\vv \omega}\times\vv r + \vv\omega\times(\vv\omega\times\vv r)
+\end{align*}
+Thus, we can write
+\[\vv F = m\vv a_f = m\ddot{\vv R}_f + m\vv a_r + m\dot{\vv \omega}\times \vv r + m\vv\omega \times(\vv\omega\times\vv r)+ 2 m\vv\omega\times\vv v_r\]
+where the subscript denotes which frame the non-position quantity is being measured in. Identifying \(m\vv a_r= \vv F_{eff}\), we can rewrite this as
+\[\vv F_{eff} = m\vv a_r = \vv F -m\ddot{\vv R}_f - m\dot{\vv \omega}\times \vv r - m\vv\omega \times(\vv\omega\times\vv r)- 2 m\vv\omega\times\vv v_r\]
+We identify the fictitious forces as follows. The term \(-m\ddot{\vv R}_f\) is the fictitous force from translation, \(-m\dot{\vv \omega}\times \vv r\) is the angular acceleration force, \(-m\vv\omega\times(\vv\omega\times \vv r)\) is the centrifugal force, and \(-2m\vv\omega\times\vv v_r\) is the Coriolis force.
+
+\subsubsection{Centrifugal Force}
+Let \(\vv\omega =\omega\hat z\) and \(\vv r = r\e r\). We can compute the direction of the centrifugal force by
+\[\vv\omega\times\vv r = \omega r (\hat z \times \e r) = \omega r \e \theta\]
+\[\vv\omega\times(\vv\omega\times\vv r) = \omega^2 r (\hat z\times\e\theta) = \omega^2r(-\e r)\]
+\begin{equation}
+	F_{cent} = -m\vv\omega\times(\vv\omega\times\vv r) = m\omega^2 r \e r
+\end{equation}
+so the particle experiences an outward force.
+
+Let us consider a space station that is a rotating ring. If we neglect the Coriolis force, then we would want the ring to be spinning with
+\[m\omega^2 r = mg \then \omega = \sqrt{\frac{g}{r}}\]
+
+\subsubsection{Coriolis Force}
+The Coriolis force is interesting as it is dependent on the motion of the particle. Consider again \(\vv\omega = \omega \hat z\). If the motion is such that \(\vv v_r = v_r \e r\), then the Coriolis force is \(\vv F_{cor} = - 2 m \omega v_r \e\theta\). Similarly, if we have \(\vv v_r = v_r\e\theta\), thent the coriolis force is in the \(+\e r\) direction; simply, the coriolis force always pulls you to the right (if \(\vv \omega\) is upward and \(\vv \omega * \vv r \neq 0\)). 
+
+If we consider the coriolis force in our rotating ring space ship, then we see that the coriolis force plays a large impact if you move around. For example, if you are in an elevator, the coriolis force will push you one way on the way up, and the opposite on the way down. 
+
+\section{Reference Frame on Planet}
+Consider the reference frame with respect to an observer standing at latitude \(\lambda\) on a rotating planet. The observer experiences a force \(\vb g_0 = -g\hat z\) downward due to gravitation. Additionally, there is a force due to the centrifugal effect pointing to
+\[\vb F_{cent} = +\omega^2R\cos^2\lambda\hat z + \omega^2R\sin\lambda\cos\lambda \hat x\]
+where \(\hat x\) points southward, parallel to the surface of the planet.
+
+Let 
+\[\vb g = \vb g_0 + \vb F_{cent}\]
+The surface of the planet is normal to \(\vb g\), \emph{not} \(\vb g_0\). A quick calculation shows that the angle between gravity and the normal is 
+\[\sin\varepsilon = \sin\lambda\cos\lambda \left(\frac{\omega^2 R}{g}\right)\]
+Because \(\varepsilon\ll 1\), we can approximate
+\[\varepsilon = \frac{\omega^2R}{2g}\sin2\lambda\]
+so we see that the equator and the poles are indeed normal to gravity, as expected. The greatest deviation occurs at \(\lambda = \SI{45}{\degree}\), which is about \(\SI{1.73}{milliradian}\approx \SI{0.1}{\degree}\). 
+We should instead set \(\hat z\parallel \vb g\) rather than \(\vb g_0\).
+
+Similarly, if you climb a mountain of height \(h\), the period increases by around
+\[T' = T\frac{h}{R}\]
+
+\section{Foucault Pendulum}
+The angular momentum of the earth points roughly from the south to the north pole. Consider a pendulum at a latitude \(\lambda\neq 0,\pi\). The attachment point of the pendulum is not inertial as it is rotating around with the earth. Pick \(\hat z\) such that \(\vb g = g\hat z\), so we don't need to consider the centrifugal term. The bob on the pendulum is acted on by the tension force, gravity, and the coriolis force. Define \(\theta\) to be the polar angle and \(\phi\) be the azimuthal angle of the pendulum with respect to \(\hat z\). The tension of the string applies a force
+\[T_z = T\cos\theta\hat z\]
+\[T_x = -T\sin\theta\cos\phi\]
+\[T_y = -T\sin\theta\sin\phi\]
+From the definition of spherical coordinates, it then follows easily that
+\[T_x = -T\frac{x}{\ell}\]
+\[T_y = -T\frac{y}{\ell}\]
+The net acceleration of the mass is given
+\[\ddot{\vb r} = \vb{g}+\frac{\vb T}{m}-2\vv \omega\times\dot{\vb r}\]
+As per usual, we assume \(\ell\gg1\then \theta\ll 1\). Thus, \(z = \ell(1-\cos\theta)\approx 0\) is a about a constant, so we set \(\dot z = 0\then T=mg\) and obtain \(\dot{\vb r} = \dot x \hat x + \dot y \hat y\). Then, the coriolis dependence can be written
+\[\vv\omega\times\dot{\vb r} = -\omega\sin\lambda\dot y\hat x + \omega\sin\lambda\dot x \hat y - \omega\cos\lambda\dot y\hat z\]
+Once again, we ignore the \(z\) contribution. Thus, we obtain the equations of motion
+\begin{subequations}
+	\begin{align*}
+		\ddot x &=-\frac{T}{m\ell}x+2\omega\sin\lambda\dot y\\
+		\ddot y &=-\frac{T}{m\ell}y-2\omega\sin\lambda\dot x\\
+		\ddot z &= -g + \frac{T}{m}+2\omega\cos\lambda\dot y \approx 0
+	\end{align*}
+\end{subequations}
+
+Neglecting the coriolis terms, we obviously obtain simple harmonic motion:
+\[r_i = A_ie^{\pm i\sqrt{\frac{T}{m\ell}}t}\]
+In polar coordinates, we can write
+\[r(t) = \sqrt{x_0^2+y_0^2}\cos\left(\sqrt{\frac{T}{m\ell}}t\right)\]
+\[\phi(t) = \arctan\left(\frac{y_0}{x_0}\right) = \phi_0\]
+for initial conditions \(x_0,y_0\), and \(\dot r(t=0)=0\).
+
+We can ``decouple'' the differential equations by defining a complex variable
+\[q=x+iy\]
+so then the differential equations be come a single equation
+\[\ddot q -2i\omega\sin(\lambda)\dot q+\frac{T}{m\ell}q=0\]
+
+This equation is that of the damped harmonic oscillator. Let\(\omega_\lambda = \omega\sin\lambda\) and \(\alpha^2 = \frac{T}{m\ell}\). From the auxiliary equation, we substitute \(q = e^{\Omega t}\) and obtain the quadratic
+\[\Omega^2+2i\omega_\lambda \Omega + \alpha^2=0\]
+or
+\[\Omega_\pm = -i\omega_\lambda\pm i\sqrt{\omega_\lambda^2+\alpha^2}\]
+The general solution is then
+\[q=A_\pm e^{\Omega_\pm t}\]
+If \(\omega_\lambda=0\), we know that this solution should reduce to that of the simple harmonic oscillator. Indeed, we obtain
+\[q_{0} = Ae^{i\alpha t}+Be^{i\alpha t}\]
+Assuming the pendulum is much smaller than the earth, we have the natural frequency of the pendulum, \(\alpha\) much smaller than the frequency of the earth \(\omega_\lambda\). Taking the approximation \(\alpha\gg\omega_\lambda\), we can write the general solution as
+\[q \approx e^{-i\omega_\lambda t}q_{0}\]
+Let \(q_0 = x'+iy'\). Then,
+\begin{align*}
+	x&=\cos\omega_\lambda t x' + \sin\omega_\lambda t y'\\
+	y&=-\sin\omega_\lambda t x' + \cos\omega\lambda t y'
+\end{align*}
+Rewriting in terms of matrix multiplication,
+\[ \begin{bmatrix}
+	x\\y
+\end{bmatrix}
+= \begin{bmatrix}
+	\cos\omega_\lambda t & \sin\omega_\lambda t\\
+	-\sin\omega_\lambda t & \cos\omega_\lambda t
+\end{bmatrix}
+\begin{bmatrix}
+	x'\\y'
+\end{bmatrix}
+\]
+we see that the transformation is a rotation matrix. Thus, we can write 
+\[\vb r = R(\omega_\lambda t)\vb r'\]
+In the northern hemisphere, we see that the precession will be clockwise whereas it will be counterclockwise in the southern hemisphere:
+\[\vb r' = R(-\omega_\lambda t)\vb r\]
+The period of this precession is given
+\[\frac{2\pi}{\omega_\lambda} = T \sim\SI{35}{hr}\]
+
+\subsection{Hurricanes}
+In a hurricane, the air comes in from high pressure toward the low pressure eye, whereupon the coriolis force causes it to rotate with a velocity \(v\). The centripetal force on the air is then given by the interplay between the coriolis force of the rotational \(v\) and the force of pressure pushing it inward. Thus, we have
+\[\frac{v^2}{r} = \frac{1}{\rho}\der{P}{r}-2\omega v\sin\lambda\]
+This is quadratic in \(v\). Solving, we can find the windspeed of the hurricane:
+\[v = -\omega r\sin\lambda \pm\sqrt{(\omega r\sin\lambda)^2+\frac{r}{\rho}\der{P}{r}}\]
+Interestingly, an anti-cyclone (where air rushes out from a high-pressure eye) is not likely to occur

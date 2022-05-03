@@ -1,0 +1,226 @@
+%! TEX root = 0-main.tex
+\chapter{Hamiltonian Mechanics}
+We start from the second form of the euler equation, where
+\[\pder{f}{x}-\der{}{x}\left(f-\dot y \pder{f}{\dot y}\right)=0\]
+Converting to the language of mechanics,
+\begin{equation}
+	\pder{L}{t}-\der{}{t}\left(L-\dot q \pder{L}{\dot q}\right)=0
+\end{equation}
+Considering only closed systems, where \(\pder{L}{t}=0\), we define the hamiltonian to be
+\begin{equation}
+	H\equiv \sum_i\dot q p_i-L
+\end{equation}
+where the conjugate variable \(p_i\) is the generalized momentum:
+\begin{equation}
+	p_i\equiv\pder{L}{\dot q_i}
+\end{equation}
+
+Note that the Hamiltonian is the Legendre transform of the Lagrangian with respect to the variables \(\dot q_i\).
+\begin{equation}
+	H(q_i, p_i, t)=\sum_i p_i \dot q_i(q_i,p_i,t)-L(q_i,\dot q_i(q_i,p_i,t), t)
+\end{equation}
+
+Using the fact that 
+\[\pder{L}{q_i}=\der{}{t}\pder{L}{\dot q_i}=\der{}{t}p_i\]
+we then have
+\begin{equation}
+	\pder{L}{q_i}=\dot p_i
+\end{equation}
+
+\section{Canonical Equations of Motion}
+We write the differential of the Hamiltonan as
+\[\d{H}=\sum_j(P_j\d{\dot q_j}+\dot q_j\d{p_j})-\sum_j\left(\pder{L}{q_j}\d{q_j}+\pder{L}{\dot q_j}\d{\dot q_j}\right)-\pder{L}{t}\d{t}\]
+Substituting in the generalized momentum,
+\[\d{H}=\sum_j\left(p_j\d{\dot q_j}+\dot q_j\d{p_j}\right)-\sum_j\left(\dot p_j\d{q_j}+p_j\d{\dot q_j}\right)-\pder{L}{t}\d{t}\]
+\[\d{H}=\sum_j\left(\dot q_j\d{p_j}-\dot p_j\d{q_j}\right)-\pder{L}{t}\d{t}\]
+Because \(\d{H}\) is an exact differential, we naturally have that:
+\begin{subequations}
+	\begin{align}
+		&\pder{H}{p_j}=\dot q_j\label{eq4:can1}\\
+		&\pder{H}{q_j}=-\dot p_j\label{eq4:can2}\\
+		&\pder{H}{t}=-\pder{L}{t}\label{eq4:cani}
+	\end{align}\label{eq4:canonical}
+\end{subequations}
+Equations~\ref{eq4:can1} and~\ref{eq4:can2} are the \emph{canonical equations of motion}. Equation~\ref{eq4:cani} is not considered part of the canonical equations of motion, but for a time independent potential, it is zero.
+
+Note that Lagrangian mechanics provides \(s=3N-m\) second order differential equations, while Hamiltonian mechnics provides \(2s\) first order differential equations.
+
+\section{Particle on a Cylinder with a Central Force}
+Consider a particle constrained on a cylinder with a force
+\[\vv{F}=-k\vv{r}\]
+pulling it toward the origin. The corresponding potential is
+\[U=\frac{1}{2}kr^2=\frac{1}{2}k\left(R^2+z^2\right)\]
+and kinetic term
+\[T=\frac{1}{2}mv^2=\frac{1}{2}m\left(\cancel{\dot R^2} + R^2\dot\phi^2+\dot z^2\right)\]
+Finally, the constraint equation is given
+\[f = x^2+y^2-R^2=0\]
+but is implicitly included in choice of coordinates. Rewriting in terms of generalized momenta,
+\[p_z=\pder{L}{\dot z}=m\dot z\]
+\[p_\phi = \pder{L}{\dot\phi}=mR^2\dot\phi\]
+
+Note that the momentum \(p_z\) corresponds to the linear momentum along the \(z\) direction, while \(p_\phi\) corresponds to the angular momentum along the \(z\) direction.
+
+While we can find the Hamiltonian as the legendre transfrom of the Lagrangian, it is simpler to note the Hamiltonian is the total energy
+\begin{equation}
+	H = T+U
+\end{equation}
+Thus, in terms of the generalized momenta,
+\[H=\frac{1}{2m}\left(p_\phi^2+p_z^2\right)+\frac{1}{2}k(z^2+R^2)\]
+The canonical equations are then
+\[\dot p_\phi = -\pder{H}{\phi}=0\]
+\[\dot p_z = -\pder{H}{z}= -k z=m\ddot z\]
+\[\dot \phi = \pder{H}{p_\phi}=\frac{p_\phi}{mR^2}\]
+\[\dot z=\pder{H}{p_z} = \frac{p_z}{m}\]
+
+From the first equation we have constant angular momentum. From the second equation, we then have \(z=A\cos\omega t\), which is simple harmonic oscillation.
+
+For the systems treated in classical mechanics, the Hamiltonian is not often easier/simpler to use than the Lagrangian. The Lagrangian works in configuration space, \((q,\dot q , t)\); \(q\) and \(\dot q\) are not independent.
+However, the Hamiltonian works in phase space \((q, p, t)\); the quantities \(q\) and \(p\) are independent, but constrained by the problem.
+
+The phase space for this problem is defined as:
+
+\[z = A\cos(\omega t)\]
+\[p_z = m\dot z = -Am\omega\sin(\omega t)\]
+\[\phi = \frac{p_\phi}{mR^2}T+A\]
+Note that the trajectory on phase space is given by a helix, constrained to a cylindrical subspace defined by \(E=H\).
+Interestingly, different trajectories in phase space can never cross.
+
+Another useful feature of the hamiltonian is that if a generalized momentum is constant, it is as a \emph{cyclic coordinate}:
+\[\dot p_\phi = -\pder{H}{\phi}=0\]
+\[p=mR^2\dot\phi=k\]
+\[\dot \phi = \frac{p_\phi}{mR^2}=\pder{H}{p_\phi}\]
+Thus,
+\[\dot \phi = \pder{H}{p_\phi}=\omega_\phi\]
+\[\then \phi = \int\omega_\phi\d{t}\]
+This integral is where the term ``integral of the motion'' comes from.
+Every cyclic coordinate removes 2 equations of motion from the Canonical equations. In Hamilton/Jacobi Theory, there are certain problems that can be transformed into only cyclic coordinates---a typical example is the the solar system.
+
+\begin{aside}[Legendre Transform]
+	Any convex/concave function may be reparametrized in terms of its derivative. The envelope of the set of all tangent lines can be used to define the line. Very simply, the legendre transform maps \((x,y)\) onto \((m\equiv\der{y}{x},b)\) by
+	\[y=mx+b\]
+	\[-b=mx-y\]
+	The hamiltonian, for example, is
+	\[H=p\dot q - L\]
+\end{aside}
+
+\section{Hamiltonian}
+When the coordinates and potential are independent of time, the system is considered a closed system. This gives
+\[\der{H}{t}=0\]
+so the hamiltonian is constant wrt time. We know that the definition of the hamiltonian is given
+\begin{align*}
+	H&=\sum_jp_j\dot q_j - L\\
+	 &=\sum_j\dot q_j\pder{L}{\dot q j} - L\\
+	 &=\sum_j\dot q_j \left(\pder{T}{\dot q_j}-\pder{U}{\dot{q}}\right)-L
+	 \intertext{Because we typically hold that \(U\) is independent of velocity, this simplifies to:}
+	 &=\sum_j\dot q_j \pder{T}{\dot q_j}-L
+\end{align*}
+The first term can be rewritten
+\[\sum_j \dot q_j \pder{T}{\dot q_j}=2T\]
+this is using the fact that in arbitrary coordinates that
+\[T=\frac{1}{2}m\sum_i\dot x_i^2=\frac{1}{2}m\left(\sum_{ij}\pder{x_i}{q_j}\dot q_j\right)^2\]
+where once again, the coordinates are independent of time, and the cartesian coordinates are reparametrized in terms of generalized coordinates \(q_j\). Expanding out,
+\[T=\sum_{ijk}\left(\frac{1}{2}m\pder{x_i}{q_j}\pder{x_i}{q_k}\right)\dot q_j\dot q_k=a^{(i)}_{jk}\dot q_j \dot q_k\]
+taking the derivative wrt \(\dot q_\ell\),
+\begin{align*}
+	\pder{T}{\dot q_\ell}&=\sum_{i,\ell}\dot q_\ell \left(\sum_{k}a^{(i)}_{\ell k}\dot q_k+\sum_j a^{(i)}_{j\ell}\dot q_j\right)\\
+	\intertext{Because multiplication is commutative, \(a_{jk}^{(i)}=a_{kj}^{(i)}\):}
+	&=\sum_{i,\ell}\dot q_\ell \left(\sum_{k}a^{(i)}_{k\ell}\dot q_k+\sum_j a^{(i)}_{j\ell}\dot q_j\right)\\
+	&=\sum_{i,\ell}\dot q_\ell \left(\sum_{j}a^{(i)}_{j\ell}\dot q_j+\sum_j a^{(i)}_{j\ell}\dot q_j\right)\\
+	&=2\sum_{ij\ell}a^{(i)}_{j\ell}\dot q_\ell \dot q_j\\
+	&=2T
+\end{align*}
+
+Thus,
+\[H=\sum_j\dot q_j\pder{T}{\dot q_j} -L = 2T-(T-U)\]
+\begin{equation}
+	H=T+U
+\end{equation}
+
+In summary, the constraints that the potential and coodinates are time independent state that the hamiltonian is constant. The constraints that the coordinates are time-independent and the potential is velocity-independent state that the hamiltonian is the total energy. Combining all three states that energy is constant.
+
+The first two constraints imply that the system has the symmetry \(t\to t+\Delta t\). This symmetry (homogeneity of time) corresponds to the conservation of energy. This is a specific case of Noether's theorem.
+
+\section{3D Pendulum}
+Take the coordinates to be spherical coordinates, wrt the \(-z\) axis. The velocities are given
+\[v_\theta =b\dot\theta\]
+\[v_\phi = b\sin\theta\dot\phi\]
+The kinetic energy is then
+\[T=\frac{1}{2}m(b^2\dot\theta^2+b^2\sin^2\theta\dot\phi^2)\]
+and the potential
+\[U=-mgb\cos\theta\]
+from the lagrangian, the generalized momenta are given
+\[p_\theta=\pder{L}{\dot\theta}=mb^2\dot\theta \qquad \qquad _\phi=\pder{L}{\dot\phi}=mb^2\sin^2\theta\dot\phi\]
+ Further, for this system we have that
+ \[H=E=T+U\]
+ \[H=\frac{1}{2}\left(\frac{p_\theta^2}{mb^2}+\frac{p_\phi^2}{mb^2\sin^2\theta}\right)-mgb\cos\theta\]
+where the kinetic term was rewritten in terms of the generalized momenta. The canonical equations are then given:
+\[\dot\theta = \pder{H}{p_\theta}=\frac{p_\theta}{mb^2}\]
+\[\dot\phi = \pder{H}{p_\phi}=\frac{p_\phi}{mb^2\sin^2\theta}\]
+\[\dot p_\theta = -\pder{H}{\theta}=\frac{p^2_\theta\cos\theta}{mb^2\sin^2\theta}-mgb\sin\theta\]
+\[\dot p_\phi=-\pder{H}{\phi}=0\]
+
+from the lagrangian, we also see that
+\[\cancel{\pder{L}{\phi}}-\der{}{t}\pder{L}{\dot\phi}=0\]
+in fact, it is the symmetry \(\phi\to\phi+\delta\phi\) that leads to the conservation of angular momentum about \(z\). The \(\theta\) dependence is not conserved, as the gravity makes it such that there is no such symmetry.
+
+\section{Noether's Theorem}
+Noether's Theorem states that every symmetry of the action of a system has an associated conserved quantity. The main symmetries considered in classical mechanics are as follows:
+
+\begin{itemize}
+	
+	\item The \emph{Homogeneity of Time} is the symmetry \(t\to t+\delta t\), which leads to the Conservation of Energy.
+
+	\item The \emph{Homogeneity of Space} is the symmetry \(x\to\x+\delta x\), and leads to the Conservation of Linear Momentum.
+
+	\item The \emph{Isotropy of Space} is the symmetry \(\vv x \to \vv x \times \delta\vv \theta\) and leads to the Conservation of Angular Momentum.
+
+\end{itemize}
+
+Other fields introduce other symmetries; much of quantum mechanics obeys Charge (\(q\to-q\)), Parity (\(r\to -r\)), and Time (\(t\to -t\)).
+
+\section{Liouville's Theorem}
+Phase space has dimension \(2N\) where \(N\) is the number of degrees of freedom of the system. For a kilogram of an ideal gas, this is on the order of \SI{6e23}{} generalized coordinates \(p_i, q_i\). Similar to Thermal Physics, while we can't analyze every trajectory, we can examine the statistical behaviour of the phase space.
+
+From the general theory of ODEs, two paths on phase space cannot intersect or join together. In fact, Liouville's Theorem states that they cannot even grow closer together or farther apart.
+
+From E\&M, we have the continuity equation
+\begin{equation}
+	\pder{\rho}{t}=-\del*\vv\jmath
+\end{equation}
+where \(\rho\) is the density, and \(\vv\jmath\) is the flux defined by the motion of the density. We can then write the flux as \(\vv\jmath = \rho \vv v\) so that
+\begin{equation}
+	\pder{\rho}{t}=-\del*(\rho\vv v)
+\end{equation}
+In fact, we can apply this equation to the flux of paths through phase space. The area element becomes
+\[\d{A}=\d{q}\d{p}\]
+and has a thickness of \(\d{t}\) in the third dimension.Thus, the density becomes
+\[\d{N}=\rho\d{A}\]
+WLOG, we can assume the paths go in from the negative values of the coordinates and go toward positive values. From the below \(q\), the volume flowing in becomes
+\[\rho \der{q}{t}\d{t}\d{p}=\rho\dot q\d{t}\d{p}\]
+and the volume flowing in from below \(p\) becomes
+\[\rho\dot p \d{t}\d{q}\]
+so, the increase in the density is
+\[\at{\pder{\rho}{t}}{\text{in}} = \rho(\dot q\d{p}+\dot p\d{q})\]
+Taylor expanding the flux into the volume, we can calculate the flux going out as
+\[\rho\dot q\d{p}\approx \rho\dot q \d{p}+\pder{}{q}(\rho \dot q)\d{q}\d{p}\]
+Thus, the decrease in density is
+\[\at{\pder{\rho}{t}}{\text{out}}=-\left(p\dot q +\pder{}{q}(\rho\dot q)\d{q}\right)\d{p}-\left(\rho\dot p+\pder{}{p}(\rho\dot p)\d{p}\right)\d{q}\]
+Thus, time derivative of the density becomes
+\begin{align*}
+	\pder{\rho}{t}\d{q}\d{p}&=\at{\der{\rho}{t}}{\text{in}}-\at{\der{\rho}{t}}{\text{out}}=-\left[\pder{}{q}(\rho\dot q)+\pder{}{p}(\rho\dot p)\right]\d{p}\d{q}\\
+	\pder{\rho}{t}&=-\left[\pder{}{q}(\rho\dot q)-\pder{}{p}(\rho\dot p)\right]
+	\intertext{generalizing to many particles,}
+		     &=-\sum_j\pder{}{q_j}(\rho\dot q_j)+\pder{}{p_j}(\rho\dot p_j)\\
+		     &=-\del*(\rho \dot x)
+\end{align*}
+which is analogous to the continuity equation for electric charge.
+
+Thus, if we select a volume in phase space \(\rho(t=0)\), we can follow its trajectory to a time \(\rho(t)\). Expanding out our newly-derived continuity equation for phase space,
+\begin{align}
+	\pder{\rho}{t}&=-\sum_j\pder{\rho}{q_j}\dot q_j +\rho\pder{\dot q_j}{q_j}+\pder{\rho}{p_j}\dot p_j + \rho\pder{\dot p_j}{p_j}\nonumber\\
+		     &=-\sum_j\pder{\rho}{q_j}\dot q_j +\pder{\rho}{p_j}\dot p_j + \rho\pder{}{q_j}\pder{H}{p_j}-\rho\pder{}{p_j}\pder{H}{q_j}\nonumber\\
+		     &=-\sum_j\pder{\rho}{q_j}\der{q_j}{t} +\pder{\rho}{p_j}\der{p_j}{t}\nonumber\\
+		     &=-\der{\rho}{t}+\pder{\rho}{t}\nonumber\\
+	\der{\rho}{t}&=0\label{eq4:liouville}
+\end{align}
+Equation~\ref{eq4:liouville} is known as Liouville's theorem, and shows how a collection of states evolves similarly to an incompressible fluid.

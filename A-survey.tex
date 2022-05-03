@@ -1,0 +1,49 @@
+%! TEX root = 0-main.tex
+\chapter{A brief survey of interesting problems}
+\section{Three-Body Problem}
+We began mechanics by examining the behaviour of a single particle through the Newtonian, Lagrangian, and Hamiltonian formalism, moved on to the 2-particle central force problem and \(N\) particles. However, the three body problem is formally unsolvable, and is still an area of active research. We will look at special cases which have solutions.
+
+If we consider three particles in space and denote them \(1,2,3\), we can easily denote the distances and forces on each problem. Focusing on particle \(1\), the total force is given
+\[F_1 = F_{12}+F_{13}=m\ddot{r}_1\]
+and so forth for the other forces. Further, from Newton's third law, we know that
+\[F_{ij}=-F_{ji}\]
+thus, we see that
+\[\sum_i F_i = \sum_i m_i\ddot{r}_i = \sum_{ij}F_{ij}=0\]
+or, 
+\[\der{}{x2}\left[\sum_i m_i\vv{r}_i\right]=\left(\sum_i m_i\right)\ddot{R}_{cm}=0\]
+
+The three-body problem is generally split into three classes of problem. The first is the restricted three-body problem, which is the case of the moon orbiting the earth, which in turn orbits the sun; \(m_m\ll m_e \ll m_\odot\). The hierarchical three-body problem rather has all masses of the same order, but with the orbit split into two sub-binaries. Finally the non-hierarchical does not assume any binaries.
+
+\subsection{Restricted Three-body problem}
+We assume that the orbits are coplanar, and that binaries are circular orbits. We consider the non-inertial frame where the sun and moon are fixed, and examine where we can place the moon. The rate the earth rotates around the sun is
+\[\Omega = \frac{G(M_\odot+m_e)}{R^3}\]
+The gravitational potential is given
+\[U(x) = -\frac{GM_\odot m}{R-x}-\frac{Gm_em}{X}\]
+adding the centrifugal term, the effective potential can be written
+\begin{equation}
+	V_{eff}(x) = -\frac{GM_\odot m}{R-x}-\frac{Gm_em}{X}-\frac{1}{2}m\frac{G(M_\odot+m_e)}{R^3}(R-x)^2
+\end{equation}
+We can find stable points by
+\[0=\at{\pder{V_{eff}}{x}}{r_L}\]
+if \(M_\odot\gg m_e\) and \(r_L\ll R\), we see that
+\[r_L\approx\left(\frac{m_e}{3M_\odot}\right)^{1/3}R\]
+More generally, we can find points in all of 2D space for these points; these points are known as the Lagrange points. The points L1--3 are semi-stable equilibria (which are stable along the angular direction and unstable along the radial direction), while L4--5 are unstable. As one of the stars in a binary pair becomes a giant, its radius can expand beyond the Lagrange points, causing the hydrogen to be siphoned toward the second star.
+
+\subsection{Hierarchical Three-body Problem}
+We consider two binaries, where masses 1 and 2 form an elliptical system that forms an additional binary with mass 3. We assume that the semimajor axis of the inner binary \(a_1\) is much less than the outer binary \(a_2\). We can write the hamiltonian of the total system as the sum of the inner binary \(H_1\), the outer binary \(H_2\), and an interaction hamiltonian;
+\begin{equation}
+	H_{LK} = H_1+H_2+H_{int}
+\end{equation}
+The interaction entropy looks akin to a multipole expansion from E\&M. Averaging the system over the two orbital periods, we obtain
+\[\vect{\vect{H_{LK}}_1}_2=\vect{\vect{H_{int}}_1}_2\]
+We can then understand the time evolution  of the eccentricity through the Poisson brackets. The eccetricity has an interesting periodic evolution where it swings between extremes of eccentricity.
+
+Such time evolutions lead to exoplanets known as ``hot Jupiters,'' where a a gas giant orbits are closer to their stars than mercury is to the sun. They also have the interesting property where their ``spins'' are anti-aligned with that of the sun, which is something we do not observe in our solar system. The influence of a third body can cause the orbit of a planet to flip and go retrograde to their normal orbit.
+
+\subsection{Non-Hierarchical Three-body Problem}
+The non-hierarchical three-body problem is a version of the hierarchical three-body problem when \(a_1\sim a_2\). It cannot solved analytically, and in fact forms a chaotic system. As such, statistical methods must be taken to generate solutions. The approach uses the \emph{ergodicity}, which in a sense describes the available paths in phase space.
+
+Returning to the phase space of a double pendulum, the phase space paths change drastically with energy, until becoming almost completely random at a certain energy. The Ergodic Hypothesis compares this phase space to that of a thermodynamic system, assuming that every microstate is equally likely at any given time.
+
+Analyzing the phase space volume of a 3-body system with ergodic theory generates predictions of chaos similar to those observed in numerical simulations. This is of interest because we believe most gravitational waves are due to these sorts of systems
+

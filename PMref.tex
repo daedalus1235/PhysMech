@@ -1,0 +1,83 @@
+\documentclass{article}
+\usepackage{hw}
+\geometry{paperheight=8.5in,
+	paperwidth=5.5in,
+	heightrounded,
+	margin=0.5in
+}
+\hfuzz=0.25in
+
+\title{\vspace{-1.5cm}Reference for E\&M\vspace{-1em}}
+\author{Charles Yang}
+\date{\vspace{-1em} \today \vspace{-2em}}
+
+\begin{document}
+\maketitle
+
+\setlength{\multicolsep}{4pt}
+\setlength{\parskip}{0pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{0pt}
+\setlength{\abovedisplayskip}{2pt}
+\setlength{\belowdisplayskip}{0pt}
+
+%\section{Non-Inertial Reference Frames}
+
+\section{Rigid Body Dynamics}
+\vspace{-1em}
+The inertia tensor \(\tb{I}\) can be written
+\begin{equation}
+	I_{ij} = \int_V\d[3]{r}\rho(r)[r^2\delta_{ij} -r_ir_j]
+\end{equation}
+When transforming to a new reference frame, \(\vb r\to \vb r+\vb a\), 
+\begin{equation}
+	J_{ij} = I_{ij} + M(a^2\delta_{ij}-a_ia_j)
+\end{equation}
+Note that in the new body frame, the kinetic energy is defined by motion of the origin of the axes, \emph{not} of the centre of mass; for example, if we rotate a cube around its edge, if we use \(\tb J\) about the edge, we need not consider the translational kinetic energy, as it is considered within the inertia tensor. The inertia tensor allows us to compute:
+\begin{subequations}
+	\begin{multicols}{2}
+		\noindent \begin{equation}
+			\vb L = \tb I \vv\omega
+		\end{equation}
+		\begin{equation}
+			T_{\text{rot}} = \frac{1}{2}\vv\omega * \tb I\vv\omega
+		\end{equation}
+	\end{multicols}
+\end{subequations}
+The Euler angles allow us to compute the dynamics of rotation. They are given by a rotation \(\phi\) about the body axis \(x_3\), a rotation \(\theta\) about \(x_2\) and then a final rotation \(\psi\) about \(x_3\). The angular veloctiy vector is given
+\begin{subequations}
+	\begin{align}
+		\omega_1&=\dot\phi\sin\theta\sin\psi+\dot\theta\cos\psi\\
+		\omega_2&=\dot\phi\sin\theta\cos\psi-\dot\theta\sin\psi\\
+		\omega_3&=\dot\phi\cos\theta+\dot\psi
+	\end{align}
+\end{subequations}
+Using this definition for our generalized coordinates in the Lagrangian, we obtain the Euler Equations of Motion with torque \(\vb N\).
+\begin{equation}
+	(I_i-I_j)\omega_i\omega_j - \sum_k(I_k\dot \omega_k - N_k)\varepsilon_{ijk}=0
+\end{equation}
+\vspace{-2.5em}
+\subsection{Symmetric Top}
+Consider a top with \(I = I_1 = I_2 \neq I_3\). Plugging this into the Euler EoM and defining \(\Omega = \frac{I_3-I_1}{I_3}\omega_3\), we see that we obtain
+\begin{subequations}
+	\begin{multicols}{3}
+		\noindent \begin{equation}
+			\omega_1 = A\cos\Omega t
+		\end{equation} 
+		\begin{equation}
+			\omega_2 = A\sin\Omega t
+		\end{equation}
+		\begin{equation}
+			\dot\omega_3 = 0
+		\end{equation}
+	\end{multicols}
+\end{subequations}
+We can view the vector \(\vb \omega\) as sweeping out a \emph{body cone} about the \(x_3\) body axis, or a \emph{space cone} about the fixed \(x_3'\) axis. The angle between the two axes \(x_3\), \(x_3'\) is, of course, \(\theta\), while the angle between \(\vv\omega\) and the body \(x_3\) axis is \(\alpha\). These two angles are related by 
+\begin{equation}
+	\tan\theta =\frac{I_1}{I_3}\tan\alpha
+\end{equation}
+There are two rates of precession. The rate that \(\vv \omega\) precesses about in the body frame is given \(\Omega\), while the rate that symmetry axis \(x_3\) precesses about the angular momentum \(\vb L  = L x_3'\) is \(\dot\phi\) and can be computed
+\begin{equation}
+	\dot \phi = \frac{L}{I_1}
+\end{equation}
+\end{document}

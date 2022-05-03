@@ -1,0 +1,187 @@
+%! TEX root = 0-main.tex
+\chapter{Coupled Oscillators}
+Coupled oscillators can exchange energy between each other. An example is the Harmonic Solid model for phonons. 
+
+\section{Two coupled oscillators}
+Consider two equal masses, connected to each other and to the walls with three springs, with displacements \(x_1, x_2\), and spring constants \(k_1,k_2 = k\) and a couping spring\( k_{12}\). The kinetic energy of the system is given
+\[T = \frac{1}{2}m \dot x_1^2+\frac{1}{2}m\dot x_2^2\]
+and similarly, the potential energy is given
+\[U = \frac{1}{2}k x_1^2 + \frac{1}{2}k_{12}(x_1-x_2)^2 + \frac{1}{2}k x_2\]
+Thus, the lagrangian can be writen
+\begin{equation}
+	L = \frac{1}{2} (\dot x_1^2+\dot x_2^2)-\frac{1}{2}k(x_1^2+x_2^2)-\frac{1}{2}k_{12}(x_1-x_2)^2
+\end{equation}
+Our equations of motion are then given
+\[m\ddot x_1 = -(k+k_{12})x_1+k_{12}x_2\]
+\[m\ddot x_2 = +k_{12}x_1-(k+k_{12})x_2\]
+If there is no coupling, i.e.\ \(k_{12}=0\), we trivially have harmonic oscillator solutions (duh.). Thus, we use test solutions
+\[x_j = B_j e^{i\omega t}\]
+Plugging into our EoM and rewriting as a matrix equation,
+\[ \begin{bmatrix}
+	-m\omega^2+(k+k_{12}) & -k_{12}\\
+	-k_{12} & -m\omega^2+ (k+k_{12})
+\end{bmatrix} \begin{bmatrix}
+	B_1\\
+	B_2
+\end{bmatrix}=0\]
+For there to be a nontrivial solution, the determinant of the matrix must be zero. This gives us a characteristic equation for \(\omega\). Rather than computing the determinant, we notice that instead we need only consider
+\[-m\omega^2+(k+k_{12}) = \mp k_{12}\]
+so
+\begin{equation}
+	\omega^2 = \frac{(k+k_{12})\pm k_{12}}{m} = \frac{k}{m},\frac{k+2k_{12}}{m}
+\end{equation}
+solving for the eigenvectors is routine computation. We see that our solutions have 
+\begin{equation}
+	B_1^\pm = \mp B_2^{\pm}
+\end{equation}
+or, the lower frequency mode is a translational mode, while the higher frequency mode is a streching mode, when focusing only on spring \(k_{12}\). Our solutions are then linear combinations of these two modes, or
+\begin{subequations}
+	\begin{align}
+		x_1&= B_1^+ e^{i\omega_+t}+B_1^-e^{-i\omega_+ t}+ B_2^+ e^{i\omega_-t}+B_2^-e^{i\omega_- t}\\
+		x_2&= -B_1^+ e^{i\omega_+t}-B_1^-e^{-i\omega_+ t}+ B_2^+ e^{i\omega_-t}-B_2^-e^{i\omega_- t}
+	\end{align}
+\end{subequations}
+The physical solutions to our equations are of course the real projections of \(x_1,x_2\).
+
+\section{Normal Coordinates}
+The previous way we solved for the motion is not the most elegant or easiest way to do so. Let us define define the normal coodinates
+\begin{equation}
+	\eta_1 = x_1+x_2\qquad\qquad\eta_2 = x_1-x_2
+\end{equation}
+Plugging these into our equation of motion and multiplying through by 2, 
+\begin{align*}
+	M(\ddot \eta_1+\ddot \eta_2)+(k+k_{12})\eta_1+k\eta_2=0\\
+	M(\ddot \eta_1-\ddot \eta_2)+(k+k_{12})\eta_1-k\eta_2=0\\
+\end{align*}
+These are easily decoupled into 
+\begin{subequations}
+	\begin{align*}
+		0&=m\ddot \eta_1 + k\eta_1\\
+		0&=m\ddot \eta_2 + (k+2k_{12})\eta_2
+	\end{align*}
+\end{subequations}
+Trivially, the are harmonic oscillators with \(\omega_1 = \sqrt{k/m}\) and \(\omega_2 = \sqrt{(k+2k_{12})/m}\). In general, the normal coordinates for a system of coupled oscillators obey
+\[0=m\ddot \eta_i + k\eta_i\]
+
+These two normal coordinates correspond to the \emph{normal modes} of osciilation; in particular, \(\eta_1\) corresponds to the \emph{symmetric mode} and \(\eta_2\) corresponds to the \emph{antisymmetric mode}, as the phase of the two masses is symmetric or antisymmetric respectively. We see the antisymmetric mode has a higher frequency of oscillation, because the middle spring is stretched and applies a greater restoring force. Typically, antisymmetric modes will be higher in frequency.
+
+If we hold one mass fixed, we see the effective spring constant is \(k+k_{12}\) and so the frequency is given 
+\[\omega_0 = \sqrt{\frac{k+k_{12}}{m}}\]
+This we define as the base frequency of the harmonic oscillators, as this is the frequency they would oscillate at if alone. Thus, we observe frequency splitting, as \(\omega_0\) splits into a higher frequency \(\omega_0<\omega_2\) and a lower frequency \(\omega_1<\omega_0\)
+The magnitude of this splitting is dependent on the size of the coupling, \(k_{12}\)
+
+\begin{aside}[Weak Coupling]
+	Consider \(k_{12}\ll k\). We can then taylor expand and write 
+	\[\omega_0 \approx \omega_1(1+\epsilon)\]
+	\[\omega_2\approx \omega_1(1+2\epsilon)\]
+	or, in terms of \(\omega_0\) (discarding higher order terms,)
+	\[\omega_1 \approx \omega_0(1-\epsilon)\]
+	\[\omega_2 \approx \omega_0(1+\epsilon)\]
+\end{aside}
+
+\section{General Oscillations}
+Consider a system of \(p\) masses in 3D, for a total of \(n=3p\) degrees of freedom. In rectilinear coordinates, we can define the position
+\[x_{\alpha, i} \qquad\qquad \alpha\in\{1,\dots,p\}\quad i\in \{1,2,3\}\]
+Further, let's assume that there's no time dependence in the transformation between rectilinear and generalized coordinates:
+\[x_{\alpha, i} = x_{\alpha, i}(q_i)\]
+Using the fact that at equilibrium we have
+\[q_k = A\quad \dot q_k = 0\quad \ddot q_k = 0\]
+we note that
+\[\der{}{t}\pder{L}{\dot q} = \der{}{t}\pder{}{\dot q}\sum_i a_i \dot q^i\]
+If \(i<1\), because \(\der{a_i}{t}=0\) is independent of time, there is zero contribution; further for \(i>1\) we can substitute \(\dot q = 0\) and \(\ddot q = 0\).
+Thus, inserting into euler lagrange, we have
+\[\pder{L}{q_k} =0\]
+or
+\begin{equation}
+	\pder{T}{q_k} = \pder{U}{q_k}\label{eq9:tueq}
+\end{equation}
+at equilibrium
+
+Trivialy, we have
+\[T = \frac{1}{2}\sum_{\alpha = 1}^p\sum_{i=1}^3 m_\alpha\dot x_{\alpha,i}^2\]
+Expanding with the chain rule, we can write \(T\) in terms of the generalized coordinates:
+\[\dot x_{\alpha, i} = \sum_j\pder{x_{\alpha,i}}{q_j}\dot q_j\]
+\[\dot x_{\alpha, i}^2 = \sum_{jk}\pder{x_{\alpha,i}}{q_j}\pder{x_{\alpha, i}}{k}\dot q_j\dot q_k\]
+so
+\[T = \frac{1}{2}\sum_{\alpha=1}^pm_\alpha\sum_{ijk} \pder{x_{\alpha,i}}{q_j}\pder{x_{\alpha, i}}{q_k}\dot q_j\dot q_k\]
+We will instead condense the \(p,i\) sum into a tensor so we can write
+\begin{equation}
+	T = \frac{1}{2}\sum_{jk}m_{jk}\dot q_j\dot q_k
+\end{equation}
+with
+\[m_{jk} = \sum_{\alpha=1}^p m_\alpha\sum_{i=1}^3 \pder{x_{\alpha,i}}{q_j}\pder{x_{\alpha,i}}{q_k}\]
+Thus, applying equilibrium, we see that 
+\[\at{\pder{T}{q_k}}{0} = 0\]
+Similarly, from Eq.~\ref{eq9:tueq}, we see that we must have
+\[\at{\pder{U}{q_k}}{0} = 0\]
+WLOG, we set the equilibrium value of \(\vb q= 0\). If we taylor expand about equilibrium, we see that
+\[U(\vb q)\approx U(0) + \del U'(0)*\vb q + \frac{1}{2}\vb q*D^2U(0)\vb q\]
+We can further fix \(U(0)=0\) to write
+\[U = \frac{1}{2}\sum_{jk}A_{jk}q_jq_k\]
+where
+\[A_{jk} = \pder{^2U}{q_j\partial q_k}\]
+
+We will now verify that our leading order approximation for \(U\) is valid for \(T\).  Expanding \(m_{jk}\) about equilibrium, we see 
+\[m_{jk} = m_{jk}(0) +\sum_\ell\at{\pder{m_{jk}}{q_\ell}}{0}q_\ell+\dots\]
+We see that beyond leading order terms, when we plug this into \(T\), we get 3rd order terms, and thus can neglect them. Thus, we need only consider \(m_{jk} = m_{jk}(0)\)
+
+Plugging these into the lagrangian, we obtain
+\[-\pder{U}{q_k}-\der{}{t}\pder{T}{\dot q_k}=0\]
+so
+\begin{equation}
+	\sum_{j}A_{jk}q_j + m_{jk}\ddot q_j = 0\label{eq9:sec1}
+\end{equation}
+which is \(n\) second order differential equations. Trivially, we see that
+\[q_j(t) = a_j e^{i(\omega t-\delta)}\]
+Plugging in our guess and dividing out the time dependence,
+\begin{equation}\sum_j(A_{jk}-\omega^2 m_{jk})a_j = 0\end{equation}
+Once again, the determinant of this matrix equation should be zero:
+\begin{equation}
+\det[A-\omega^2m] = 0
+\end{equation}
+This is the \emph{characteristic} or \emph{secular} equation. There are \(n\) solutions for \(\omega\), which are our eigenfrequencies. Of couse, these need not be unique; we can have degenerate modes. Using the principle of superposition, any solution is a linear combination of these trial solutions:
+\begin{equation}
+	q_j(t) = \sum_{r=1}^n a_{jr}e^{i(\omega_r t-\delta_r)}\label{eq9:lincom}
+\end{equation}
+where our physical solution is the real part of this solution.
+
+\subsection{Generalized Normal Coordinates}
+Of course, as both our kinetic energy and potential energy are written as quadratic forms:
+\[T = \frac{1}{2}\b{\dot q} m\k{\dot q}\]
+\[U = \frac{1}{2}\b{q} A\k{q}\]
+we can find a basis with which they are diagonal. In fact, it is true that they are diagonalwr to the same basis, the \emph{normal coordinates}. Because we can diagonalize with real eigenvalues, distinct eigenspaces are orthogonal, and we can normalize subject to the constraint 
+\[\sum_{jk}m_{jk}a_{jr}a_{ks} = \delta_{rs}\]
+This can be obtained by plugging Eq~\ref{eq9:lincom} into Eq~\ref{eq9:sec1} and summing over with a second \(a_{ks}\).
+\[\omega^2_s\sum_{k}m_{jk}a_{ks} = \sum_k A_{jk}a_{ks}\]
+\begin{equation}
+	\omega_r^2\sum_{jk} m_{jk}a_{jr}a_{ks} = \sum_{jk}A_{jk}A_{jk}a_{jr}a_{ks} = \omega_s^2\sum_{jk} m_{jk}a_{jr}a_{ks} \label{eq9:sec}
+\end{equation}
+
+In general, then we can write
+\[q_j = \sum_r \gamma_r a_{jr}e^{i(\omega_rt-\delta_r)}\]
+absorbing the phase into \(\gamma_r\), we find that 
+\[q_j = \sum_ra_{jr}\beta_re^{i\omega_r t}\]
+and so we find our normal coordinates to be
+\begin{equation}
+	\eta_r = \beta_r e^{i\omega_r t}
+\end{equation}
+or
+\[q_j = \sum_r a_{jr}\eta_r\]
+
+Plugging into the Lagrangian and enforcing our orthonormality constraint, we find that 
+\[T\to \frac{1}{2}\sum_r\dot\eta_r^2\]
+similarly, plugging into the porential energy and applying Eq.\ref{eq9:sec}
+\[U = \frac{1}{2}\sum_r\omega_r^2\eta_r^2\]
+so
+\[\ddot\eta_r^2 = -\omega_r^2\eta_r\]
+
+\section{Molecular vibrations}
+An individual atom has three degrees of freedom in space---one for each translational degree of freedom. For a molecule with \(N=2\), there are 6 degrees of freedom---however, rather than 6 translational degrees, we have 3 translational degrees, 2 rotational degrees, and one vibrational degree. 
+
+In particular we which to consider \ce{CO2}, which is a linear \(N=3\) molecule. Again, it has 3 translational degrees of freedom and 2 rotational degrees of freedom. However, it is more difficult to determin how many vibrational degrees there are. It turns out there are 2 scissor modes, an antisymmetric stretch, and a symetric stretch. We can measure these modes via laser light. 
+
+Considering the longitudinal stretching modes, we see that we can model the system as two coupled harmonic oscillators. The normal modes are given by the symmetric and antisymmetric motion of the oxygen atoms. However, the antisymmetric stretch corresponds to a motion of the carbon, which causes a time-dependent dipole moment, and thus radates.
+
+Similarly, we can model the scissoring modes as a angle-dependent restorign force. Once again, there is a time-dependent dipole moment, and thus we expect radiation.
+
+Comparing the frequencies of the vibration to the frequency of light emitted, and because we know the mass of the atoms, we can find the spring constants associated with each mode. It turns out each of these modes corresponds to infra red light.

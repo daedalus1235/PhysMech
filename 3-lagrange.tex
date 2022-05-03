@@ -1,0 +1,378 @@
+%! TEX root = 0-main.tex
+\chapter{Lagrangian Mechanics}
+Now with knowledge of teh calculus of variations, we are equipped to revisit Hamilton's Principle. Hamilton's principle states that the evolution of a system is a stationary point of the action functional
+\begin{equation}
+	S[q]=\int_{t_0}^{t_1}L(q,\dot{q},t)\d{t}
+\end{equation}
+where the function
+\begin{equation}
+	L\equiv T-U
+\end{equation}
+is known as the \emph{Lagrangian}. Assuming the kinetic and potential terms can be written:
+\[T=T(\dot{X}) \qquad U=U(x)\]
+we can write the action as
+\begin{align}
+	\delta S &=\delta \int_{t_0}^{t_1}L\d{t}=\int_{t_0}^{t_1}\delta L\d{t}\nonumber\\
+		 &=\int_{t_0}^{t_1}\left(\pder{L}{x}-\der{}{t}\pder{L}{\dot{x}}\right)\delta{x}\d{t}
+\end{align}
+The application of the Euler equation to the Lagrangian yields the \emph{Euler-Lagrange Equation}:
+\begin{equation}
+	\pder{L}{x}-\der{}{t}\pder{L}{\dot{x}}=0
+\end{equation}
+Notice that force does not play a role in the Euler-Lagrange equation; rather, we rely on the \emph{principle of least action}. Hamilton's principle is a quantifiable to the philosophical idea of least action. Because force is not required to solve the equations of motion, we can solve a more diverse systems where discussing forces does not make sense; for example, we can use this approach in the Standard Model of particle physics (Lagrangian omitted for brevity). Similarly, general relativity can be calculated using a Lagrangian:
+\[L_{GR}=R\sqrt{-g}\]
+
+\section{Equivalence with Newton's Laws}
+Consider the motion of a particle in 1D with a conservative potential \(U(x)\). The kinetic energy can be states
+\begin{equation}
+	T=\frac{1}{2}m\dot{x}^2
+\end{equation}
+Thus, the Lagrangian can be states
+\begin{equation}
+	L=\frac{1}{2}m\dot{x}^2-U
+\end{equation}
+Plugging into the Euler Lagrange equation, we obtain:
+\[\pder{L}{x}=-\pder{U}{x}=F\]
+\[\pder{L}{\dot x}=m\dot x = p\]
+Thus,
+\[F-\der{}{t}p=-\]
+or
+\[F=\der{p}{t}\]
+
+While more difficult, it is possible to show that Hamilton's principles leads to Newton's laws in all cases, and even more so, that Newton's laws leads to the Lagrangian (after applying D'Alembert's principle). 
+
+\section{Simple Harmonic Motion}
+The lagrangian for this system is
+\[L=\frac{1}{2}m\dot{x}^2-\frac{1}{2}kx^2\]
+Using the Euler Lagrange equation,
+\[0=-kx-m\ddot x\then m\ddot{x}=-kx\]
+
+\section{Plane Pendulum}
+We \underbar{do not} apply the small angle approximation. We examine a pendulum with length \(\ell\) and the angle \(\theta\) from the stable equilibrium, with pivot at point \((\ell,\ell)\)
+
+The position of the pendulum can be seen to be
+\begin{subequations}
+	\begin{align}
+		x&=\ell(1+\sin\theta)\\
+		y&&=\ell(1-\cos\theta)
+	\end{align}
+\end{subequations}
+Thus, the kinetic term can be found
+\begin{align}
+	T&=\frac{1}{2}m(\dot x^2+\dot y^2)\nonumber\\
+	 &=\frac{1}{2}m\ell^2\dot\theta^2
+\end{align}
+The potential term is
+\begin{align}
+	U&=mgy\nonumber\\
+	 &=mg\ell(1-\cos\theta)
+\end{align}
+The lagrangian is then
+\begin{equation}
+	L=\frac{1}{2}m\ell^2\dot\theta^2-mg\ell(1-\cos\theta)
+\end{equation}
+
+Plugging in the Euler-Lagrange equation,
+\[0=\pder{L}{\theta}-\der{}{t}\pder{L}{\dot\theta}\]
+\[0=-mg\ell\sin\theta-\der{}{t}m\ell^2\dot\theta\]
+\[\then \ddot{\theta}=-\frac{g}{\ell}\sin\theta\]
+which is the expected result from newtonian mechanics.
+
+Note that we were able to define the lagrangian in terms of the polar coordinates, and were able to use the euler-lagrange equation without having to implement any jacobians or scale factors. 
+
+\section{Atwood's Machine}
+The atwood machine is two masses on either end of a rope hung over a pulley. We define the coordinates such that \(x\) is the distace from the pulley to mass1, and the total length to be \(\ell\), neglecting the size of the pulley.
+
+The kinetic term is
+\[T=\frac{1}{2}m_1\dot{x}_1^2+\frac{1}{2}m_2\dot{x}_2^2=\frac{1}{2}(m_1+m_2)\dot{x}^2\]
+and the potential term is
+\[U=-m_1gx-m_2g(\ell-x)\]
+Thus, the lagrangian is
+\[L=\frac{1}{2}(m_1+m_2)\ddot{x}^2+m_1gx+m_2g(\ell-x)\]
+Applying the Euler Lagrange equation,
+\[0=\pder{L}{x}-\der{}{t}\pder{L}{\dot x}\]
+\[0=(m_1-m_2)g-\der{}{t}(m_1+m_2)\dot x\]
+\[\ddot{x}=\frac{m_1-m_2}{m_1+m_2}g\]
+
+The lagrangian allowed us to ignore the effects of tension against the force of gravity.
+
+\section{Double Pendulum}
+We can define a double pendulum by two angles \(\phi_1, \phi_2\), lengths \(\ell_1, \ell_2\), and masses \(m_1, m_2\).
+
+\emph{Note: we never finished this example.}
+
+\section{Configuration Spaces}
+\subsection{Degrees of Freedom}
+For a single particle in 3D space, then to uniquely describe the particle, we need a position vector, for a total of \(3\) degrees of freedom.
+
+For a collection of \(N\) particles, with no constraints, the degrees of freedom naturally scale extensively, with \(3N\) degrees of freedom. Constraints can reduce the degrees of freedom. In general each constraint reduces the degrees of freedom by one. For configuration (no velocity), the degrees of freedom \(S\) is:
+\begin{equation}
+	S=ND-m
+\end{equation}
+where \(N\) is the number of particles, \(D\) is the number of dimensions, \(m\) is the number of constaints.
+
+Note we don't consider the velocity vector. Consider a 2D pendulum. While we can describe the system uniquely by \(\theta\) and \(\dot\theta\), the only mechanical degree of freedom is \(\theta\); the ``velocity'' \(\dot\theta\) is how the degree of freedom is being used.
+
+\subsection{Generalized Coordinates}
+We can create a set of generalized coordinates \(q\) with one coordinate \(q_i\) for each degree of freedom. In general, we can index these as:
+\begin{equation}
+	x_{\alpha,i}= x_{\alpha,i}(q_{\alpha,1}, q_{\alpha,2},\ldots,q_{\alpha,s},t)
+\end{equation}
+for an object \(\alpha\). For example, the \(x_1\) (x) position of a 2D pendulum can be written \(x_1=\ell\sin\theta\) and the \(x_2\) (y) position would be \(x_2=\ell\cos\theta\)
+
+Typically, for shorthand, we write
+\begin{equation}
+	x_\alpha=x_\alpha(q_\alpha,t)
+\end{equation}
+Thus, the time derivative is
+\begin{equation}
+	\dot x_\alpha=x_\alpha(q_\alpha, \dot q_\alpha, t)
+\end{equation}
+
+Naturally, we can also write the generalized coordinates in terms of the cartesian, as:
+\begin{subequations}
+	\begin{align}
+		q_\alpha &= q_\alpha(x_\alpha,t)\\
+		\dot q_\alpha&=\dot q_\alpha (x_\alpha, \dot x_\alpha, t)
+	\end{align}
+\end{subequations}
+
+Something to note is that the cartesian coordinates implicitly include equations of contraints within the function \(x_\alpha(q_\alpha,t)\), as while there are \(ND\) \(x_{\alpha,i}\), there are only \(ND-m\) \(q_{\alpha,j}\). We include these as \emph{holonomic constraints}, or constraints that do not depend on velocity. These contraints can be written as 
+\begin{equation}
+	g(q_\alpha, t)=0
+\end{equation}
+
+
+\section{Mass on an inclined plane}
+A block slides down a wedge that is lying on the ground. There is no friction between the wedge and the block, nor between the wedge and the ground. There are only two degrees of freedom---the wedge has a constraint restricting its y position, and the block has a constraint to remain on the incline on the wedge. Thus, the degrees of freedom is \(2*2-2=2\).
+Label the objects \(1\) for the wedge and \(2\) for the block.
+
+We denote the generalized coordinates \(d\) being how far the block has slid down the wedge, and \(x\) how far the wedge has slid along the ground.
+
+From this, we see that 
+\[x_1=x \quad \dot{x}_1=\dot{x}\]
+\[x_2=\vect{x,h}+d\vect{\cos\alpha, \sin\alpha} \quad \dot{x}_2=\vect{\dot x+\dot d \cos\alpha, -\dot \sin\alpha}\]
+Thus, the kinetic energy is given 
+\begin{align*}
+	T&=T_1+T_2\\
+	 &=\frac{1}{2}{m_1}\dot{x}+\frac{1}{2}m_2\left(\dot{x}^2+\dot d^2+2\dot x \dot d \cos\alpha\right)
+\end{align*}
+The potential is similarly
+\begin{align*}
+	U&=U_1+U_2\\
+	 &=0+m_2g(h-d\sin\alpha)
+\end{align*}
+
+Thus, the full Lagrangian is:
+\[L=\frac{1}{2}m_1\dot{x}^2+\frac{1}{2}m_2\left(\dot x^2+\dot d^2+2\dot x\dot d \cos\alpha\right)-m_2g(h-d\sin\alpha)\]
+
+Applying the Euler Lagrange equation,
+\begin{align*}
+	0&=\pder{L}{x}-\der{}{t}\pder{L}{\dot{x}}\\
+	 &=0-\der{}{t}\left(m_1\dot x + m_2 \dot x + m_2\dot d\cos\alpha\right)\\
+	k_1&=m_1\dot x + m_2\left(\dot{x}+\dot{d}\cos\alpha\right)
+	\intertext{Note that this can also be written as \(p_1+p_2=k_1\); this is because momentum is an integral of the motion.}
+	0&=\pder{L}{d}-\der{}{t}\pder{L}{\dot d}\\
+	 &=m_2g\sin\alpha -\der{}{t}m_2\left(\dot d + \dot x \cos\alpha\right)\\
+	 &=m_2g\sin\alpha - m_2\left(\ddot d+\ddot x \cos\alpha\right)\\
+	 \intertext{We can take the time derivative of the \(x\) equation of motion and plug into the \(d\) equation of motion to obtain:}
+	 &=m_2g\sin\alpha+m_2\left(\ddot d -\frac{m_2}{m_1+m_2}\ddot{d}\cos^2\alpha\right)\\
+	g\sin\alpha &= \ddot d \left(1-\frac{m_2}{m_1+m_2}\cos^2\alpha\right)\\
+	\intertext{Defining \(\beta\equiv\frac{m_2}{m_1+m_2}\)}
+	\ddot d &=\frac{g\sin\alpha}{1-\beta\cos^2\alpha}
+	\intertext{Similarly, we can obtain}
+	\ddot{x}&=\frac{-\beta g \sin\alpha\cos\alpha}{1-\beta\cos^2\alpha}
+\end{align*}
+Thus, the acceleration of both the block and the mass are constant.
+
+Checking limiting cases, when \(\alpha=0\), we see the acceleration of the block is \(\ddot d=0\) and the acceleration of the wedge \(\ddot x=0\). Thus, we reobtain free 1D motion.
+
+Additionally, when \(\alpha=\pi/2\), we get the acceleration of the block to be \(\ddot{d}=g\) and the acceleration of the wedge \(\ddot{x}=0\), which is identical to a free-falling mass.
+
+Perturbing masses, in the regime \(m_1\gg m_2\), we have \(\beta\to0\). Thus, \(\ddot=g\sin\alpha\) and \(\ddot{x}=0\) which reduces the problem to that of a block sliding down a fixed ramp.
+
+Finally, if we take \(m_2\gg m_1\), we have \(\beta\to1\). Thus, \(\ddot{d}=\frac{g}{\sin\alpha}\) and \(\ddot x = -g\cot\alpha\). Interstingly, the acceleration of the block down the wedge is strictly greater than gravity alone! This is because the wedge is getting shot out from under the block at the same time.
+
+\section{Pendulum revisited}
+We reparametrize the pendulum in terms of the distance from the pendulum to the vertical, \(d=\ell\sin\theta\). Then,
+\[x=\ell+d \qquad y=\ell-\sqrt{\ell^2+d^2}\]
+Further,
+\[\dot x=\dot d \qquad \dot y = \frac{d\dot d}{\sqrt{\ell^2-d^2}}\]
+The lagrangian is then
+\[\L=\frac{1}{2}m\left(\dot d ^2 +\frac{d^2\dot d^2}{\ell^2-d^2}\right)+mg\ell-mg\sqrt{\ell^2+d^2}\]
+Plugging into mathematica, we can plot a numerical solution as a function of time, and it yields the same solution as the angular coordinate system. This demonstrates that the lagrangian formulation is coordinate independent, and the real art of lagrangian mechanics is choosing convenient coordinate systems.
+
+\section{Atwod Machine Revisited}
+We can work the Atwood machine considering the force on each of the two masses. We can consider the length of the rope a constraint equation, with \[g(y_1,y_2)=y_1+y_2+\pi R-\ell=0\]
+The Lagrangian is simple for this case:
+\[\L = \frac{1}{2}m_1\dot y_1^1+\frac{1}{2}m_2\dot y_2^2+m_1gy_1+m_2gy_2\]
+The Euler Lagrange equations can be written:
+\[\pder{L}{y_i}-\der{}{t}\pder{L}{\dot y_i}+\lambda\pder{g}{y_1}=0\]
+This then becomes:
+\[m_ig-m_i\ddot y_i+\lambda=0\]
+setting the two \(\lambda\)'s equal,
+\[(m_1-m_2)g-m_1\ddot y_1+m_2\ddot y_2=0\]
+From the constraint equation, we have
+\[\ddot g = \ddot y_1+\ddot y_2 = 0\]
+Thus,
+\[(m_1-m_2)g-(m_1+m_2)\ddot y_1=0\]
+\[\ddot y_1 = \frac{m_1-m_2}{m_1+m_2}g\]
+Similarly,
+\[\ddot y_2=\frac{m_2-m_1}{m_1+m_2}g\]
+Plugging these back into the euler lagrange equation, we can find the lagrange multiplier
+\[m_1g-m_1\frac{m_1-m_2}{m_1+m_2}g+\lambda\pder{g}{y_1}=0\]
+\[\lambda \pder{g}{y_1}=\frac{2m_1m_2}{m_1+m_2}g\]
+note that this equal to the tension force from newtonian mechanics. The term \(\lambda\pder{g}{y_1}\) is known as a \emph{generalized force}.
+
+\section{Euler Lagrange with Constraints}
+We can write the action of a constrained lagrangian as
+\[\delta S = \delta \int_{t_0}^{t_1}\L-\sum_i\lambda_i f_i\d{t}\]
+where the constraint functions \(f_j\) are defined as
+\[f_j=f_j(q, \dot{q},t)=0\]
+We can add these to the action integral because they are equally zero.
+
+Varying the constaints,
+\[\delta f_i = \pder{f_i}{\alpha} = \pder{f_j}{q}\pder{q}{\alpha}+\pder{f_j}{\dot q}\pder{\dot q}{\alpha}=0\]
+Summing the contraints and integrating,
+\[\int_{t_0}^{t_1}\d{t}\sum_j\pder{f_j}{q}\pder{q}{\alpha}+\pder{f}{\dot q}\pder{\dot q}{\alpha} = 0\]
+Integrating the second term by parts,
+\[\int_{t_0}^{t_1}\d{t} \pder{f_j}{\dot q} =\cancel{\eval{\pder{f}{\dot q}\pder{q}{\alpha}}{t_0}{t_1}} -\int_{t_0}^{t_1}\d{t}\pder{q}{\alpha}\der{}{t}\pder{f_j}{\dot q}\]
+Recall that \(\pder{q}{\alpha}\equiv \delta q\), which by definition is zero at the endpoints. Thus,
+\begin{equation}
+	0=\int_{t_0}^{t_1} \sum_j \left[\pder{f_j}{q}-\der{}{t}\pder{f_j}{\dot q}\right]\delta q \d{t}
+\end{equation}
+Defining
+\begin{equation}
+	\chi_j\equiv \pder{f_j}{q}-\der{}{t}\pder{f_j}{\dot q}
+\end{equation}
+we can rewrite the integral as
+\begin{equation}
+	\int_{t_0}^{t_1}\sum_j \chi_j\delta q \d{t}
+\end{equation}
+We can then define a space with the inner product
+\begin{equation}
+	\langle a, b\rangle \equiv \int_{t_0}^{t_1}ab\d{t}
+\end{equation}
+Thus, we can use this inner product to show that the sum of the constraints is orthogonal to the variations:
+\begin{equation}
+	\langle \sum_j \chi_j, \delta q\rangle =0
+\end{equation}
+However, the above holds for all \(j\), including \(j=1\), so
+\[\langle \chi_j, \delta q\rangle =0\]
+We can similarly define
+\[\Lambda \equiv \pder{L}{q}-\der{}{t}\pder{L}{\dot q}\]
+thus
+\[\langle \Lambda, \delta q \rangle = 0\]
+
+We can define a subspace of functions orthogonal to \(\delta q\). We claim that the set \(\chi_j\) spans the space\footnote{no idea how the \(\chi\)'s span the subspace but }, and thus
+\begin{equation}
+	\Lambda = \sum_j\lambda_j\chi_j
+\end{equation}
+or, more verbosely,
+\[\pder{L}{q}-\der{}{t}\pder{L}{\dot q} = \sum_j\pder{f_j}{q}-\der{}{t}\pder{f_j}{\dot q}\]
+Making use of linearity, we can rewrite this as
+\begin{equation}
+	\pder{}{q}\left( L+\sum_j\lambda_j f_j\right) -\der{}{t}\pder{}{\dot q}\left(L+\sum_j\lambda j f_j\right)=0
+\end{equation}
+
+Thus, for holonomic constraints, the problem becomes the determination of
+\begin{equation}
+	\L = L+\sum_j\lambda_j f_j
+\end{equation}
+\begin{equation}
+	\pder{\L}{q}-\der{}{t}\pder{\L}{\dot q}=0
+\end{equation}
+Note that if the constraints are not holonomic (i.e., they have a dependence on \(\dot q\)), then the second term becomes difficult to determine. Plugging in holonomic constraints, we obtain:
+\begin{equation}
+	0=\pder{L}{q}-\der{}{t}\pder{L}{\dot q} +\sum\lambda_j\pder{f_j}{q}
+\end{equation}
+
+\begin{aside}[Non-holonomic constraints]
+	There are some functions that are easier to treat in a constrained problem. Such a function is one of the form
+	\[\tilde{f}(x,\dot x, t)=\sum_i\pder{f}{x_i}\dot{x}_i+\pder{f}{t}\]
+	for some holonomic constraint \(f(x,t)=0\). It can be written as
+	\[\tilde{f}=\der{f}{t}\]
+	This type of function is known as a \emph{semi-holonomic constraint}
+\end{aside}
+
+\subsection{Constraints and D'alembert's Principle}
+In Newtonian mechanics, we consider the force to be broken up as:
+\[\vv{F}_{ext}+\vv{N}=m\ddot{\vv{x}}\]
+The normal force \(\vv{N}\) is akin to a constraint force
+
+Take a box going down a ramp defined by
+\[f(x,y)=y+\frac{3}{4}x-3=0\]
+Note that the gradient 
+\[\frac{\del f}{\norm {\del f}} = \frac{3}{5}\hat{x}+\frac{4}{5}\hat{y}\]
+points in the same direction as the normal force; more generally,
+\[\vv{N}=\lambda(t)\del f\]
+for a constraint \(f(x,t)=0\).
+
+Introducing a vector \(\tau\perp\del f\), we can multiply the newtonian law
+\begin{equation}
+	(m\ddot{\vv{x}} - \vv F -\lambda\del f)*\vv \tau =0 \label{eq3:newton}
+\end{equation}
+Thus,
+\[(m\ddot{\vv{x}} - \vv F)*\vv \tau=0\]
+
+This can be expanded to multiple constraints as:
+\[\vv{N_i}=\lambda(x,t)\del f_i\]
+
+Thus, for multiple particles, we have:
+\[\sum_i \vv{\tau}_i*\del_i f_j=0\]
+
+and our analogue to Equation~\ref{eq3:newton} becomes:
+\begin{equation}
+	\sum_i \left(m_i\ddot{\vv{x}}_i-\vv{F}_i-\sum_j \lambda_j\del_i f_j\right)*\vv{\tau}_i=0
+\end{equation}
+Because we know the contrains are orthogonal to \(\tau\), we obtain D'alembert's Principle:
+\begin{equation}
+	\sum_i\left(m\ddot{\vv x}_i-\vv{F}_i\right)*\vv{\tau}_i=0 \label{eq3:dalembert}
+\end{equation}
+
+Because the dot product is independent of coordinate system, we can rewrite the the vector \(\tau\) as:
+\[\vv\tau_i = \sum_\alpha \epsilon^\alpha \pder{\vv{x}_i}{q^\alpha}\]
+This definition is taken to satisfy the chain rule:
+\[\sum_i\tau_i\del_if_j = \epsilon^\alpha \sum_i\pder{\vv{x}}{q^\alpha}\del_if_j = \epsilon^\alpha\sum_i\pder{f_j}{q^\alpha}=0\]
+
+Thus, we rewrite d'Alembert's principle for generalized coordinatesas
+\begin{equation}
+	\sum_i \left(m_i \ddot{\vv x}_i - \vv{F}_i \right)*\pder{\vv{x}_i}{q^\alpha}=0
+\end{equation}
+From here, we can use the product rule to rewrite:
+\[m_i\ddot{\vv x}_i*\pder{\vv{x}_i}{q^\alpha}=\der{}{t}\left[m_i\dot{\vv x}_i*\pder{\vv{x}_i}{q^\alpha}\right]-m_i\dot{\vv x}_i*\der{}{t}\pder{\vv{x}_i}{q^\alpha}\]
+using
+\[\dot{\vv{x}}_i=\sum_\alpha \pder{\vv{x_i}}{q^\alpha}\dot{q}^\alpha+\pder{\vv{x}_i}{t}\]
+and
+\[\pder{\vv{x}_i}{\dot q^\alpha}=\pder{\vv{x}_i}{q^\alpha}\]
+we can rewrite the second term as
+\begin{align*}
+	\der{}{t}\pder{\vv{x}_i}{q^\alpha}&=\sum_\beta\pder{^2\vv{x}_i}{q^\alpha\partial q^\beta}\dot q^\beta+\pder{}{t}\left(\pder{\vv{x}_i}{q^\alpha}\right)\\
+					  &=\pder{}{q^\alpha}\left[\sum_\beta \pder{\vv{x}_i}{q^\beta}\dot q^\beta+\pder{\vv{x}_i}{t}\right]\\
+					  &=\pder{}{q^\alpha}\der{\vv{x}_i}{t}\\
+					  &=\pder{\dot{\vv x}_i}{q^\alpha}
+\end{align*}
+Thus,
+\begin{equation}
+	\sum_i m_i\ddot{\vv x}_i*\pder{\vv{x}_i}{q^\alpha}=\sum_i\left[\der{}{t}\left(m_i\dot{\vv x}_i*\pder{\dot{\vv{x}}}{\dot q^\alpha}\right)-m_i\dot{\vv x}_i *\pder{\dot{\vv x}}{q^\alpha}\right]
+\end{equation}
+From kinetic energy,
+\[T=\frac{1}{2}\sum_i m_i\dot{\vv x}_i^2\]
+\[\pder{T}{\dot q^\alpha}=\sum_i m_i \dot{\vv x}_i*\pder{\dot{\vv x}}{\dot q^\alpha}\]
+\[\pder{T}{q^\alpha}=\sum_i m_i\dot{\vv x}_i*\pder{\dot{\vv x}}{q^\alpha}\]
+so
+\begin{equation}
+	\sum_im_i\ddot{\vv x}_i*\pder{\vv{x}_i}{q^\alpha}=\der{}{t}\left(\pder{T}{\dot q^\alpha}\right)-\pder{T}{q^\alpha}
+\end{equation}
+plugging into the original equation,
+\[\der{}{t}\pder{T}{\dot q^\alpha}-\pder{T}{q^\alpha}-\sum_i \vv{F}_i*\pder{\vv{x}_i}{q^\alpha}=0\]
+using \(\vv{F}_i=\del U\), we see
+\[-\sum_i\del_i U*\pder{\vv{x}_i}{q^\alpha}=-\pder{U}{q_\alpha}\]
+so,
+\[\der{}{T}\pder{T}{\dot q^\alpha}-\pder{T}{q^\alpha}+\pder{U}{q^\alpha}=0\]
+\[\pder{T}{q^\alpha}-\pder{U}{q^\alpha}-\der{}{t}\pder{T}{\dot\alpha}=0\]
+Considering \(U(q^\alpha)\) independent of \(\dot q^\alpha\),
+\[\pder{T}{q^\alpha}-\pder{U}{q^\alpha}-\der{}{t}\pder{T}{\dot q^\alpha}-\der{}{t}\left[-\pder{U}{\dot q^\alpha}=0\right]\]
+\[\pder{}{q^\alpha}(T-U)-\der{}{t}\pder{}{\dot q^\alpha}(T-U)=0\]
+where \(L=T-U\) is the familiar Lagrangian
+
